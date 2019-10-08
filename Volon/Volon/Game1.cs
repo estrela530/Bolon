@@ -3,6 +3,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Volon.Def;
+using Volon.Device;
+using Volon.Scene;
+
 /// <summary>
 /// プロジェクト名がnamespaceとなります
 /// </summary>
@@ -16,7 +20,9 @@ namespace Volon
     {
         // フィールド（このクラスの情報を記述）
         private GraphicsDeviceManager graphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
-        private SpriteBatch spriteBatch;//画像をスクリーン上に描画するためのオブジェクト
+        private Renderer renderer;
+        private GameDevice gameDevice;
+        private SceneManager sceneManager;
 
         /// <summary>
         /// コンストラクタ
@@ -28,6 +34,10 @@ namespace Volon
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             //コンテンツデータ（リソースデータ）のルートフォルダは"Contentに設定
             Content.RootDirectory = "Content";
+
+            graphicsDeviceManager.PreferredBackBufferWidth = Screen.Width;
+            graphicsDeviceManager.PreferredBackBufferHeight = Screen.Height;
+
         }
 
         /// <summary>
@@ -36,7 +46,28 @@ namespace Volon
         protected override void Initialize()
         {
             // この下にロジックを記述
+            //ゲームデバイスの実体を取得
+            gameDevice = GameDevice.Instance(Content, GraphicsDevice);
 
+            //シーン管理生成
+            sceneManager = new SceneManager();
+
+            sceneManager.Add(Scene.SceneName.LoadScene, new LoadScene());
+            sceneManager.Add(Scene.SceneName.GameTitle, new GameTitle());
+            sceneManager.Add(Scene.SceneName.GamePlay, new GamePlay());
+            sceneManager.Add(Scene.SceneName.GameEnding, new GameEnding());
+
+            //最初のシーンに変更
+            sceneManager.Change(Scene.SceneName.LoadScene);
+
+            //CSVReader csvReader = new CSVReader();
+            //csvReader.Read("map.csv");
+
+            #region ゴリラ
+            //map = new Map(gameDevice);
+            //map.Load("map.csv");
+            //gameObjectManager.Add(map);
+            #endregion
 
 
             // この上にロジックを記述
@@ -49,10 +80,9 @@ namespace Volon
         /// </summary>
         protected override void LoadContent()
         {
-            // 画像を描画するために、スプライトバッチオブジェクトの実体生成
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // この下にロジックを記述
+            renderer = gameDevice.GetRenderer();
 
 
             // この上にロジックを記述
@@ -85,7 +115,9 @@ namespace Volon
             }
 
             // この下に更新ロジックを記述
+            gameDevice.Update(gameTime);
 
+            sceneManager.Update(gameTime);
             // この上にロジックを記述
             base.Update(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
         }
@@ -100,7 +132,7 @@ namespace Volon
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // この下に描画ロジックを記述
-
+            sceneManager.Draw(renderer);
 
             //この上にロジックを記述
             base.Draw(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！

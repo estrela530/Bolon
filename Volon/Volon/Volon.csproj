@@ -41,10 +41,31 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Def\Screen.cs" />
+    <Compile Include="Device\GameDevice.cs" />
+    <Compile Include="Device\Input.cs" />
+    <Compile Include="Device\Loader.cs" />
+    <Compile Include="Device\Renderer.cs" />
+    <Compile Include="Device\Sound.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Actor\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scene\BGMLoder.cs" />
+    <Compile Include="Scene\GameEnding.cs" />
+    <Compile Include="Scene\GamePlay.cs" />
+    <Compile Include="Scene\GameTitle.cs" />
+    <Compile Include="Scene\IScene.cs" />
+    <Compile Include="Scene\LoadScene.cs" />
+    <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="Scene\SceneName.cs" />
+    <Compile Include="Scene\SELoader.cs" />
+    <Compile Include="Scene\TextureLoader.cs" />
+    <Compile Include="Static\NowCurrentScene.cs" />
+    <Compile Include="Util\CountDownTimer.cs" />
+    <Compile Include="Util\Motion.cs" />
+    <Compile Include="Util\Range.cs" />
+    <Compile Include="Util\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

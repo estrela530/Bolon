@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volon.Scene;
 
-namespace Volon
+namespace Volon.Static
 {
-    class Player
+    static class NowCurrentScene
     {
+        public static IScene currentScene;
     }
 }
