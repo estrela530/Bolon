@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Volon
+namespace Volon.Actor
 {
-    class Player
+    class ThornsBlock
     {
-        //海人頼んだ～！
     }
 }
