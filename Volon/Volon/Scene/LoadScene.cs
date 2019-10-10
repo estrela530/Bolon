@@ -40,7 +40,7 @@ namespace Volon.Scene
         {
             // テクスチャディレクトリのデフォルトパス
             string path = "./Texture/";
-            //string pathAnimation = "./Animation/";
+            string pathAnimation = "./Animation/";
 
             // 読み込み対象データ
             string[,] data = new string[,]
@@ -48,12 +48,8 @@ namespace Volon.Scene
                
                 //ここから下追加
                 {"Title",path},
-                {"Ending",path},
-                {"Player",path },
-                {"NormalBlock",path},
-                {"SpecialBlock",path},
-                {"ThornBlock",path},
-                {"GravityBlock",path},
+                {"Ending",path}
+
                 //ここから上追加
             };
 
