@@ -8,5 +8,6 @@ namespace Volon.Actor
 {
     class NormalBlock
     {
+
     }
 }
