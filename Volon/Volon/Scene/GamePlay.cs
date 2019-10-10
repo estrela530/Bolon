@@ -10,9 +10,18 @@ namespace Volon.Scene
 {
     class GamePlay : IScene
     {
+
+        private GameDevice gameDevice;
+        private Renderer renderer;
+
+        public GamePlay()
+        {
+            gameDevice = GameDevice.Instance();
+        }
         public void Draw(Renderer renderer)
         {
-            throw new NotImplementedException();
+            renderer.Begin();
+            renderer.End();
         }
 
         public void Initialize()
