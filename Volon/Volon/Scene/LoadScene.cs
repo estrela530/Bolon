@@ -45,11 +45,14 @@ namespace Volon.Scene
             // 読み込み対象データ
             string[,] data = new string[,]
             {
-               
-                //ここから下追加
                 {"Title",path},
-                {"Ending",path}
-
+                {"Ending",path},               
+                //ここから下追加
+                {"GravityBlock",path},
+                {"NormalBlock",path},
+                {"Player",path},
+                {"SpecialBlock",path},
+                {"ThornBlock",path},
                 //ここから上追加
             };
 
@@ -69,7 +72,9 @@ namespace Volon.Scene
             // BGM読み込み対象データ
             string[,] data = new string[,]
             {
-                 
+                //ここから下追加
+                {"VoLoN BGM",path},
+                //ここから上追加
             };
 
             return data;
