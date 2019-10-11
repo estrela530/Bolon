@@ -35,7 +35,7 @@ namespace Volon.Actor
             this.mediator = mediator;
         }
         public abstract void Initialize();
-        public abstract void Update(GameTime gametime);
+        public abstract void Update(GameTime gameTime);
         public abstract void Shutdown();
         public abstract void Hit(Character other);
         public bool IsDead()

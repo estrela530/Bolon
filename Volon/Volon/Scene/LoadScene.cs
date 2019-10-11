@@ -56,6 +56,9 @@ namespace Volon.Scene
                 {"SpecialBlock",path},
                 {"ThornBlock",path},
                 {"number",path},
+                {"background1",path},
+                {"cloud",path},
+                {"cloud2",path},
             };
 
             return data;
