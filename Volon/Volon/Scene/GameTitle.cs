@@ -39,7 +39,7 @@ namespace Volon.Scene
             renderer = gameDevice.GetRenderer();
 
             //ここから下追加
-            num = 0;
+            num = 60;
             nextScene = SceneName.GamePlay;
             //ここから上追加
 
@@ -53,7 +53,10 @@ namespace Volon.Scene
 
         public void Initialize()
         {
+            num = 0;
+            nextScene = SceneName.GamePlay;
             isEndFlag = false;
+            
         }
 
         /// <summary>
@@ -67,7 +70,7 @@ namespace Volon.Scene
 
         public SceneName Next()
         {
-            return SceneName.GamePlay;
+            return nextScene;
         }
 
         public void Shutdown()
@@ -77,28 +80,24 @@ namespace Volon.Scene
 
         public void Update(GameTime gameTime)
         {
-            if (Input.GetKeyRelease(Keys.Space))
+            if (Input.GetKeyState(Keys.Space))
+            {
+                num++;
+            }
+            if (Input.GetKeyRelease(Keys.Space) && num <= 10)
             {
                 isEndFlag = true;
             }
-            //if (Input.GetKeyState(Keys.Space))
-            //{
-
-            //    //num++;
-            //    //if (Input.GetKeyRelease(Keys.Space) && num <= 10)
-            //    //{
-            //    //    isEndFlag = true;
-            //    //}
-            //    //if (Input.GetKeyRelease(Keys.Space) && num >= 60)
-            //    //{
-            //    //    nextScene = SceneName.Tutorial;
-            //    //    isEndFlag = true;
-            //    //}
-            //    //else if(Input.GetKeyRelease(Keys.Space))
-            //    //{
-            //    //    num = 0;
-            //    //}
-            //}
+            if (Input.GetKeyRelease(Keys.Space) && num >= 60)
+            {
+                nextScene = SceneName.Tutorial;
+                isEndFlag = true;
+                return;
+            }
+            else if (Input.GetKeyRelease(Keys.Space))
+            {
+                num = 0;
+            }
         }
     }
 }

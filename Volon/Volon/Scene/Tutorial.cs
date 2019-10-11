@@ -9,7 +9,7 @@ using Volon.Device;
 
 namespace Volon.Scene
 {
-    class GamePlay : IScene
+    class Tutorial : IScene
     {
         //フィールド
         // 終了しているかどうか
@@ -21,7 +21,7 @@ namespace Volon.Scene
         private Renderer renderer;
         private GameDevice gameDevice;
 
-        public GamePlay()
+        public Tutorial()
         {
             isEndFlag = false;
             var gameDevice = GameDevice.Instance();
@@ -33,13 +33,13 @@ namespace Volon.Scene
         public void Draw(Renderer renderer)
         {
             renderer.Begin();
-            renderer.DrawTexture("GamePlay",Vector2.Zero);
+            renderer.DrawTexture("Tutorial", Vector2.Zero);
             renderer.End();
         }
 
         public void Initialize()
         {
-            isEndFlag = false;
+
         }
 
         public bool IsEnd()
@@ -49,12 +49,12 @@ namespace Volon.Scene
 
         public SceneName Next()
         {
-            return SceneName.GameEnding;
+            return SceneName.GamePlay;
         }
 
         public void Shutdown()
         {
-            
+
         }
 
         public void Update(GameTime gameTime)

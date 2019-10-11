@@ -46,14 +46,14 @@ namespace Volon.Scene
             string[,] data = new string[,]
             {
                 {"Title",path},
-                {"Ending",path},               
-                //ここから下追加
+                {"Ending",path},
+                {"GamePlay",path},
+                {"Tutorial",path},
                 {"GravityBlock",path},
                 {"NormalBlock",path},
                 {"Player",path},
                 {"SpecialBlock",path},
                 {"ThornBlock",path},
-                //ここから上追加
             };
 
             return data;
