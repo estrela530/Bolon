@@ -48,6 +48,7 @@ namespace Volon.Scene
         {
             renderer.Begin();
             renderer.DrawTexture("Title", Vector2.Zero);
+            //うんち
 
             #region　数字//角煮用
             if ((int)num2 / 1000 <= 9 && (int)num2 / 1000 >= 1)
