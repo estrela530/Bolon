@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Actor\Character.cs" />
     <Compile Include="Actor\GravityBlock.cs" />
     <Compile Include="Actor\NormalBlock.cs" />
     <Compile Include="Actor\SpecialBlock.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Scene\GameEnding.cs" />
     <Compile Include="Scene\GamePlay.cs" />
     <Compile Include="Scene\GameTitle.cs" />
+    <Compile Include="Scene\IGameMediator.cs" />
     <Compile Include="Scene\IScene.cs" />
     <Compile Include="Scene\LoadScene.cs" />
     <Compile Include="Scene\SceneManager.cs" />
