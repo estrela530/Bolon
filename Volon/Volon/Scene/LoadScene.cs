@@ -76,6 +76,7 @@ namespace Volon.Scene
             {
                 //ここから下追加
                 {"VoLoN BGM",path},
+                {"VoLoN BGM2",path},
                 //ここから上追加
             };
 

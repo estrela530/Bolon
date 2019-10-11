@@ -98,6 +98,7 @@ namespace Volon.Scene
 
         public void Update(GameTime gameTime)
         {
+            sound.PlayBGM("VoLoN BGM");
             num2 += 1/60f;//角煮用
             if (Input.GetKeyState(Keys.Space))
             {

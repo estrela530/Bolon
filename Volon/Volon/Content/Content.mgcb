@@ -151,3 +151,9 @@
 /processorParam:TextureFormat=Color
 /build:Texture/number.png
 
+#begin Sound/VoLoN BGM2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/VoLoN BGM2.mp3
+
