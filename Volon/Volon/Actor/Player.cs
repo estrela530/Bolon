@@ -19,6 +19,7 @@ namespace Volon.Actor
         //フィールド
         private Sound sound;
         private float riseSpeed;
+        private bool blockJumpNow;
 
         //当たり判定用enum
         private enum Direction
