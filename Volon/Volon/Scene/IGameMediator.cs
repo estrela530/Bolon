@@ -9,8 +9,7 @@ namespace Volon.Scene
 {
     interface IGameMediator
     {
-        void AddActor(Character character);
-        void AddScore();
-        void AddScore(int num);
+        //void AddScore();
+        //void AddScore(int num);
     }
 }

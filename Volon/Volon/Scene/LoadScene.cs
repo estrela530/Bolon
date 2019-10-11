@@ -47,7 +47,8 @@ namespace Volon.Scene
             {
                 {"Title",path},
                 {"Ending",path},
-                {"GamePlay",path},
+                {"GamePlay",path},            
+                {"GamePlaySmall",path},
                 {"Tutorial",path},
                 {"GravityBlock",path},
                 {"NormalBlock",path},

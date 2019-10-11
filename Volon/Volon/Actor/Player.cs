@@ -19,6 +19,8 @@ namespace Volon.Actor
         private Sound sound;
         private float riseSpeed;
         private bool blockJumpNow;
+        private float gravity = 5.0f;
+        public static bool IsDescentFlag;
 
         //当たり判定用enum
         private enum Direction
@@ -36,7 +38,7 @@ namespace Volon.Actor
             position = Vector2.Zero;
             var gameDevice = GameDevice.Instance();
             sound = gameDevice.GetSound();
-
+            IsDescentFlag = false;
         }
 
         public override void Initialize()
@@ -64,7 +66,13 @@ namespace Volon.Actor
             var max = new Vector2(Screen.Width - 64, Screen.Height - 64);
             position = Vector2.Clamp(position, min, max);
 
-           
+            //移動用メソッド実装
+            PlayerRiseMove();
+
+            if (Input.GetKeyState(Keys.D))
+            {
+                position.X += 5;
+            }
 
             //Screenからはみ出さないようにする処理
             position = position + Input.Velocity() * speed;
@@ -97,11 +105,12 @@ namespace Volon.Actor
         /// </summary>
         public void PlayerRiseMove()
         {
-            
+            position.X += 5;
 
-            if (Input.GetKeyTrigger(Keys.Space))
+            //IsDesceentFlagがfalseで
+            if (IsDescentFlag == false)
             {
-
+                position.Y += -5.0f;              
             }
         }
 
