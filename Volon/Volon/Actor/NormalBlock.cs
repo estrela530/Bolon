@@ -19,8 +19,7 @@ namespace Volon.Actor
         public NormalBlock(Vector2 position,IGameMediator mediator)
             : base("NormalBlock", mediator)
         {
-            var gameDevice = GameDevice.Instance();
-            rnd = gameDevice.GetRandom();
+            Random rnd = new Random();
             speed = rnd.Next(1, 5);
 
             this.position=position;
@@ -28,6 +27,7 @@ namespace Volon.Actor
 
         public override void Initialize()
         {
+            speed = rnd.Next(1, 5);
         }
 
         public override void Shutdown()

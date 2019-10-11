@@ -71,7 +71,10 @@ namespace Volon.Scene
             isEndFlag = false;
             //ここから下追加
             blockManager = new BlockManager();
-            blockManager.Add(new NormalBlock(new Vector2(600, 300), igameMediator));//生成確認用
+            blockManager.Add(new NormalBlock(new Vector2(1000, 100), igameMediator));//生成確認用
+            blockManager.Add(new GravityBlock(new Vector2(1000, 200), igameMediator));//生成確認用
+            blockManager.Add(new SpecialBlock(new Vector2(1000, 300), igameMediator));//生成確認用
+            blockManager.Add(new ThornsBlock(new Vector2(1000, 400), igameMediator));//生成確認用
 
             back = 0;
             back2 = 0;
