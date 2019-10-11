@@ -68,6 +68,7 @@
     <Compile Include="Scene\SceneName.cs" />
     <Compile Include="Scene\SELoader.cs" />
     <Compile Include="Scene\TextureLoader.cs" />
+    <Compile Include="Scene\Tutorial.cs" />
     <Compile Include="Static\NowCurrentScene.cs" />
     <Compile Include="Util\CountDownTimer.cs" />
     <Compile Include="Util\Motion.cs" />

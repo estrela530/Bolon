@@ -23,6 +23,7 @@ namespace Volon.Scene
 
         //ここから下追加
         private int num;
+        private float num2;//角煮用
         private SceneName nextScene;
         //ここから上追加
 
@@ -39,7 +40,6 @@ namespace Volon.Scene
             renderer = gameDevice.GetRenderer();
 
             //ここから下追加
-            num = 0;
             nextScene = SceneName.GamePlay;
             //ここから上追加
 
@@ -48,12 +48,34 @@ namespace Volon.Scene
         {
             renderer.Begin();
             renderer.DrawTexture("Title", Vector2.Zero);
+            //うんち
+
+            #region　数字//角煮用
+            if ((int)num2 / 1000 <= 9 && (int)num2 / 1000 >= 1)
+            {
+                renderer.DrawNumber("number", Vector2.Zero, num2.ToString("f2"), 7);
+            }
+            if ((int)num2 / 100 <= 9 && (int)num2 / 100 >= 1)
+            {
+                renderer.DrawNumber("number", Vector2.Zero, num2.ToString("f2"), 6);
+            }
+            if ((int)num2 / 10 <= 9&& (int)num2 / 10 >= 1)
+            {
+                renderer.DrawNumber("number", Vector2.Zero, num2.ToString("f2"), 5);
+            }
+            renderer.DrawNumber("number", Vector2.Zero, num2.ToString("f2"), 4);
+            #endregion
+
             renderer.End();
         }
 
         public void Initialize()
         {
+            num = 0;
+            num2 = 0.0f;//角煮用
+            nextScene = SceneName.GamePlay;
             isEndFlag = false;
+            
         }
 
         /// <summary>
@@ -67,7 +89,7 @@ namespace Volon.Scene
 
         public SceneName Next()
         {
-            return SceneName.GamePlay;
+            return nextScene;
         }
 
         public void Shutdown()
@@ -77,28 +99,26 @@ namespace Volon.Scene
 
         public void Update(GameTime gameTime)
         {
-            if (Input.GetKeyRelease(Keys.Space))
+            sound.PlayBGM("VoLoN BGM");
+            num2 += 1/60f;//角煮用
+            if (Input.GetKeyState(Keys.Space))
+            {
+                num++;
+            }
+            if (Input.GetKeyRelease(Keys.Space) && num <= 10)
             {
                 isEndFlag = true;
             }
-            //if (Input.GetKeyState(Keys.Space))
-            //{
-
-            //    //num++;
-            //    //if (Input.GetKeyRelease(Keys.Space) && num <= 10)
-            //    //{
-            //    //    isEndFlag = true;
-            //    //}
-            //    //if (Input.GetKeyRelease(Keys.Space) && num >= 60)
-            //    //{
-            //    //    nextScene = SceneName.Tutorial;
-            //    //    isEndFlag = true;
-            //    //}
-            //    //else if(Input.GetKeyRelease(Keys.Space))
-            //    //{
-            //    //    num = 0;
-            //    //}
-            //}
+            if (Input.GetKeyRelease(Keys.Space) && num >= 60)
+            {
+                nextScene = SceneName.Tutorial;
+                isEndFlag = true;
+                return;
+            }
+            else if (Input.GetKeyRelease(Keys.Space))
+            {
+                num = 0;
+            }
         }
     }
 }

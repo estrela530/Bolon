@@ -19,6 +19,8 @@ namespace Volon.Actor
         private Sound sound;
         private float riseSpeed;
         private bool blockJumpNow;
+        private float gravity = 5.0f;
+        public static bool IsDescentFlag;
 
         //当たり判定用enum
         private enum Direction
@@ -33,15 +35,15 @@ namespace Volon.Actor
               : base("Player", mediator)
 
         {
-            position = Vector2.Zero;
+            position = new Vector2(100, 600);
             var gameDevice = GameDevice.Instance();
             sound = gameDevice.GetSound();
-
+            IsDescentFlag = false;
         }
 
         public override void Initialize()
         {
-            position = new Vector2(300, 400);
+            position = new Vector2(0, 0);
             directionRange = new Dictionary<Direction, Range>()
             {
                 {Direction.Down,new Range(0,3) },
@@ -62,32 +64,21 @@ namespace Volon.Actor
             //当たり判定
             var min = Vector2.Zero;
             var max = new Vector2(Screen.Width - 64, Screen.Height - 64);
-            position = Vector2.Clamp(position, min, max);
+            //position = Vector2.Clamp(position, min, max);
 
-           
+            //移動用メソッド実装
+            PlayerRiseMove();
 
-            //Screenからはみ出さないようにする処理
-            position = position + Input.Velocity() * speed;
-            if (position.X < 0.0f)
+            if (Input.GetKeyState(Keys.D))
             {
-                position.X = 0.0f;
-            }
-            if (position.X >= Screen.Width - 64)
-            {
-                position.X = Screen.Width - 64;
-            }
-            if (position.Y < 0.0f)
-            {
-                position.Y = 0.0f;
-            }
-            if (position.Y > Screen.Height - 64)
-            {
-                position.Y = Screen.Height - 64;
+
+                position.Y += 30.0f;
             }
 
-            position = Vector2.Clamp(position, Vector2.Zero, new Vector2(735, 535));
+
+
             UpdateMotion();
-           
+
         }
 
         //Playerが昇る動きと押したら降下
@@ -97,15 +88,16 @@ namespace Volon.Actor
         /// </summary>
         public void PlayerRiseMove()
         {
-            
+            position.X += 2.0f;
 
-            if (Input.GetKeyTrigger(Keys.Space))
+            //IsDesceentFlagがfalseで
+            if (IsDescentFlag == false)
             {
-
+                position.Y += -10.0f;
             }
         }
 
-        
+
 
         public override void Shutdown()
         {
@@ -114,7 +106,7 @@ namespace Volon.Actor
 
         public override void Hit(Character other)
         {
-           
+
         }
         public override void Draw(Renderer renderer)
         {

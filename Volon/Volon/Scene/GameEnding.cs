@@ -16,6 +16,7 @@ namespace Volon.Scene
     class GameEnding : IScene
     {
         private bool IsEndFlag;//終了フラグ
+        private bool on;
 
         /// <summary>
         /// コンストラクタ
@@ -23,6 +24,7 @@ namespace Volon.Scene
         public GameEnding()
         {
             IsEndFlag = false;
+            on = false;
         }
 
         /// <summary>
@@ -44,6 +46,7 @@ namespace Volon.Scene
         public void Initialize()
         {
             IsEndFlag = false;
+            on = false;
         }
 
         /// <summary>
@@ -78,6 +81,10 @@ namespace Volon.Scene
         public void Update(GameTime gameTime)
         {
             if (Input.GetKeyTrigger(Keys.Space))
+            {
+                on = true;
+            }
+            if (Input.GetKeyRelease(Keys.Space)&&on==true)
             {
                 IsEndFlag = true;
             }

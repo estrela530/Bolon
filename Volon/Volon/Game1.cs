@@ -55,6 +55,7 @@ namespace Volon
             sceneManager.Add(Scene.SceneName.LoadScene, new LoadScene());
             sceneManager.Add(Scene.SceneName.GameTitle, new GameTitle());
             sceneManager.Add(Scene.SceneName.GamePlay, new GamePlay());
+            sceneManager.Add(Scene.SceneName.Tutorial, new Tutorial());
             sceneManager.Add(Scene.SceneName.GameEnding, new GameEnding());
 
             //最初のシーンに変更
