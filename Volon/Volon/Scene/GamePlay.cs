@@ -28,6 +28,8 @@ namespace Volon.Scene
         //IgameMediator
         private IGameMediator igameMediator;
 
+        private List<Character> characters;
+
         public GamePlay()
         {
             isEndFlag = false;
@@ -73,6 +75,8 @@ namespace Volon.Scene
             {
                 isEndFlag = true;
             }
+
+            player.Update(gameTime);
         }
     }
 }
