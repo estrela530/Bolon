@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Actor\BlockManager.cs" />
     <Compile Include="Actor\Character.cs" />
     <Compile Include="Actor\GravityBlock.cs" />
     <Compile Include="Actor\NormalBlock.cs" />

@@ -13,17 +13,17 @@ namespace Volon.Actor
     class NormalBlock : Character
     {
 
-        float speed;
-        Random rnd;
+        private float speed;
+        private Random rnd;
 
-        public NormalBlock(IGameMediator mediator)
+        public NormalBlock(Vector2 position,IGameMediator mediator)
             : base("NormalBlock", mediator)
         {
             var gameDevice = GameDevice.Instance();
             rnd = gameDevice.GetRandom();
             speed = rnd.Next(1, 5);
 
-            position = new Vector2(Screen.Width, Screen.Height);
+            this.position=position;
         }
 
         public override void Initialize()
@@ -34,7 +34,7 @@ namespace Volon.Actor
         {
         }
 
-        public override void Update(GameTime gametime)
+        public override void Update(GameTime gameTime)
         {
             Move();
         }

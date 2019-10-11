@@ -20,7 +20,7 @@ namespace Volon.Scene
 
         // レンダラー
         private Renderer renderer;
-        private GameDevice gameDevice;
+        //private GameDevice gameDevice;
 
         //Playerクラス
         private Player player;
@@ -29,6 +29,10 @@ namespace Volon.Scene
         private IGameMediator igameMediator;
 
         private List<Character> characters;
+
+        //ここから下追加
+        private BlockManager blockManager;
+        //ここから上追加
 
         public GamePlay()
         {
@@ -39,12 +43,18 @@ namespace Volon.Scene
             //レンダラー生成
             renderer = gameDevice.GetRenderer();
             player = new Player(igameMediator);
+            //ここから下追加
+            blockManager = new BlockManager();
+            //ここから上追加
         }
         public void Draw(Renderer renderer)
         {
             renderer.Begin();
             renderer.DrawTexture("GamePlaySmall",Vector2.Zero);
             player.Draw(renderer);
+            //ここから下追加
+            blockManager.Draw();
+            //ここから上追加
             renderer.End();
         }
 
@@ -52,6 +62,10 @@ namespace Volon.Scene
         {
             Player player = new Player(this);
             isEndFlag = false;
+            //ここから下追加
+            blockManager = new BlockManager();
+            blockManager.Add(new NormalBlock(new Vector2(600,300),igameMediator));//生成確認用
+            //ここから上追加
         }
 
         public bool IsEnd()
@@ -77,6 +91,10 @@ namespace Volon.Scene
             }
 
             player.Update(gameTime);
+
+            //ここから下追加
+            blockManager.Update(gameTime);
+            //ここから上追加
         }
     }
 }
