@@ -77,7 +77,7 @@ namespace Volon.Scene
         /// <param name="gameTime">ゲーム時間</param>
         public void Update(GameTime gameTime)
         {
-            if (Input.IsButtonDown(PlayerIndex.One, Buttons.Start))
+            if (Input.GetKeyTrigger(Keys.Space))
             {
                 IsEndFlag = true;
             }

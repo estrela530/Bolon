@@ -21,6 +21,11 @@ namespace Volon.Scene
         // レンダラー
         private Renderer renderer;
 
+        //ここから下追加
+        private int num;
+        private SceneName nextScene;
+        //ここから上追加
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -32,6 +37,12 @@ namespace Volon.Scene
 
             //レンダラー生成
             renderer = gameDevice.GetRenderer();
+
+            //ここから下追加
+            num = 0;
+            nextScene = SceneName.GamePlay;
+            //ここから上追加
+
         }
         public void Draw(Renderer renderer)
         {
@@ -66,20 +77,28 @@ namespace Volon.Scene
 
         public void Update(GameTime gameTime)
         {
-            if (Input.GetKeyTrigger(Keys.Space))
+            if (Input.GetKeyRelease(Keys.Space))
             {
                 isEndFlag = true;
             }
-
-
-
-            //if (/*Input.ButtonDown(PlayerIndex.One, Buttons.Y) ||*/
-            //    Input.GetKeyTrigger(Keys.Space))
+            //if (Input.GetKeyState(Keys.Space))
             //{
-            //    isEndFlag = true;
+
+            //    //num++;
+            //    //if (Input.GetKeyRelease(Keys.Space) && num <= 10)
+            //    //{
+            //    //    isEndFlag = true;
+            //    //}
+            //    //if (Input.GetKeyRelease(Keys.Space) && num >= 60)
+            //    //{
+            //    //    nextScene = SceneName.Tutorial;
+            //    //    isEndFlag = true;
+            //    //}
+            //    //else if(Input.GetKeyRelease(Keys.Space))
+            //    //{
+            //    //    num = 0;
+            //    //}
             //}
-
-
         }
     }
 }

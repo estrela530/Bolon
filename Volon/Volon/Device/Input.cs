@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Volon.Dvice
+namespace Volon.Device
 {
     class Input
     {
@@ -79,6 +79,10 @@ namespace Volon.Dvice
         public static bool GetKeyState(Keys key)
         {
             return currentKey.IsKeyDown(key);
+        }
+        public static bool GetKeyRelease(Keys key)
+        {
+            return currentKey.IsKeyUp(key) && previouskey.IsKeyDown(key);
         }
         public static bool IsMouseLBottonDown()
         {
