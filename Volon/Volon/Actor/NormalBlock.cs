@@ -14,20 +14,19 @@ namespace Volon.Actor
     {
 
         private float speed;
-        private Random rnd;
+        private Random rnd=new Random();
 
         public NormalBlock(Vector2 position,IGameMediator mediator)
             : base("NormalBlock", mediator)
         {
-            Random rnd = new Random();
-            speed = rnd.Next(1, 5);
+            speed = rnd.Next(3, 5);
 
             this.position=position;
         }
 
         public override void Initialize()
         {
-            speed = rnd.Next(1, 5);
+            speed = rnd.Next(3, 5);
         }
 
         public override void Shutdown()

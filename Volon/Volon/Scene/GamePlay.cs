@@ -33,6 +33,8 @@ namespace Volon.Scene
         //ここから下追加
         private BlockManager blockManager;
         private int back, back2, back3, back4, back5, back6;
+        private int intervalNormal;
+        private Random rnd = new Random();
         //ここから上追加
 
         public GamePlay()
@@ -70,11 +72,11 @@ namespace Volon.Scene
             Player player = new Player(this);
             isEndFlag = false;
             //ここから下追加
-            blockManager = new BlockManager();
-            blockManager.Add(new NormalBlock(new Vector2(1000, 100), igameMediator));//生成確認用
-            blockManager.Add(new GravityBlock(new Vector2(1000, 200), igameMediator));//生成確認用
-            blockManager.Add(new SpecialBlock(new Vector2(1000, 300), igameMediator));//生成確認用
-            blockManager.Add(new ThornsBlock(new Vector2(1000, 400), igameMediator));//生成確認用
+            blockManager = new BlockManager();//ブロック管理者を生成
+            //blockManager.Add(new NormalBlock(new Vector2(1000, 100), igameMediator));//生成確認用
+            //blockManager.Add(new GravityBlock(new Vector2(1000, 200), igameMediator));//生成確認用
+            //blockManager.Add(new SpecialBlock(new Vector2(1000, 300), igameMediator));//生成確認用
+            //blockManager.Add(new ThornsBlock(new Vector2(1000, 400), igameMediator));//生成確認用
 
             back = 0;
             back2 = 0;
@@ -82,6 +84,9 @@ namespace Volon.Scene
             back4 = 1280;
             back5 = 1280;
             back6 = 1280;
+
+            //rnd = new Random();//ランダム生成
+            intervalNormal = 0;//間隔時間を0に
             //ここから上追加
         }
 
@@ -111,7 +116,15 @@ namespace Volon.Scene
 
             //ここから下追加
             blockManager.Update(gameTime);
-
+            #region ランダム生成
+            intervalNormal++;
+            if (intervalNormal >= rnd.Next(90, 160))
+            {
+                blockManager.Add(new NormalBlock(new Vector2(1280, (rnd.Next(4, 11)*50)), igameMediator));
+                intervalNormal = 0;
+            }
+            #endregion
+            #region 背景
             back -= 1;
             if (back <= -1280)
             {
@@ -142,6 +155,7 @@ namespace Volon.Scene
             {
                 back6 = 1280;
             }
+            #endregion
             //ここから上追加
         }
     }
