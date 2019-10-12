@@ -56,7 +56,6 @@ namespace Volon.Actor
 
         public void Update(GameTime gameTime)
         {
-
             foreach (var p in players)
             {
                 p.Update(gameTime);
@@ -81,6 +80,8 @@ namespace Volon.Actor
             addNewList.Clear();
 
             HitToBlocks();
+
+            blocks.RemoveAll(c => c.IsDead() == true);//
         }
         //public void Add(Character character)
         //{

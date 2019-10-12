@@ -16,17 +16,19 @@ namespace Volon.Actor
         private float speed;
         private Random rnd=new Random();
 
+
         public NormalBlock(Vector2 position,IGameMediator mediator)
             : base("NormalBlock", mediator)
         {
             speed = rnd.Next(3, 5);
-
             this.position=position;
+            isDeadFlag = false;//
         }
 
         public override void Initialize()
         {
             speed = rnd.Next(3, 5);
+            isDeadFlag = false;//
         }
 
         public override void Shutdown()
@@ -35,6 +37,12 @@ namespace Volon.Actor
 
         public override void Update(GameTime gameTime)
         {
+            //x軸500以下で死亡
+            if (position.X <= 500)
+            {
+                isDeadFlag = true;
+            }
+            //
             Move();
         }
         public override void Hit(Character other)
