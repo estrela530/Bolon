@@ -180,7 +180,10 @@ namespace Volon.Actor
 
         public override void Hit(Character other)
         {
-
+            IsDescentFlag = false;
+            seconds = 0;
+            power = 0;
+            firstPower = -15.0f;
         }
         public override void Draw(Renderer renderer)
         {

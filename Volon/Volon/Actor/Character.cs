@@ -50,7 +50,7 @@ namespace Volon.Actor
         {
             float length = (position - other.position).Length();
 
-            float radiusSum = 32f + 32f;
+            float radiusSum = 64f;
             if (length <= radiusSum)
             {
                 return true;

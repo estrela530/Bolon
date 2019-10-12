@@ -30,6 +30,7 @@ namespace Volon.Scene
 
         private List<Character> characters;
 
+
         //ここから下追加
         private BlockManager blockManager;
         private int back, back2, back3, back4, back5, back6;
@@ -60,9 +61,8 @@ namespace Volon.Scene
             renderer.DrawTexture("cloud", new Vector2(back5, 0), 0.5f);
             renderer.DrawTexture("cloud2", new Vector2(back3, 0), 0.3f);
             renderer.DrawTexture("cloud2", new Vector2(back6, 0), 0.3f);
-            player.Draw(renderer);
+            blockManager.Draw(renderer);
             //ここから下追加
-            blockManager.Draw();
             //ここから上追加
             renderer.End();
         }
@@ -73,6 +73,7 @@ namespace Volon.Scene
             isEndFlag = false;
             //ここから下追加
             blockManager = new BlockManager();//ブロック管理者を生成
+            blockManager.Add(player);
             //blockManager.Add(new NormalBlock(new Vector2(1000, 100), igameMediator));//生成確認用
             //blockManager.Add(new GravityBlock(new Vector2(1000, 200), igameMediator));//生成確認用
             //blockManager.Add(new SpecialBlock(new Vector2(1000, 300), igameMediator));//生成確認用
