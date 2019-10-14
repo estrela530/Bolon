@@ -19,20 +19,18 @@ namespace Volon.Actor
         protected string name;
         protected bool isDeadFlag;
         protected IGameMediator mediator;
-        protected enum State
-        {
-            preparation,
-            Alive,
-            Dying,
-            Dead
-        };
+        protected int width;//幅
+        protected int height;//高さ
 
-        public Character(string name, IGameMediator mediator)
+        public Character(string name, int width, int height, IGameMediator mediator)
         {
             this.name = name;
             position = Vector2.Zero;
             isDeadFlag = false;
             this.mediator = mediator;
+            this.width = width;
+            this.height = height;
+
         }
         public abstract void Initialize();
         public abstract void Update(GameTime gameTime);

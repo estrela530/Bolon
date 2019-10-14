@@ -17,7 +17,7 @@ namespace Volon.Actor
         private Random rnd = new Random();
 
         public GravityBlock(Vector2 position, IGameMediator mediator)
-            : base("GravityBlock", mediator)
+            : base("GravityBlock", 200, 50, mediator)
         {
             speed = rnd.Next(3, 5);
 

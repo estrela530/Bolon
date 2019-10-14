@@ -43,7 +43,7 @@ namespace Volon.Actor
         private Dictionary<Direction, Range> directionRange;
 
         public Player(IGameMediator mediator)
-              : base("Player", mediator)
+              : base("Player", 60, 60, mediator)
 
         {
             position = new Vector2(100, 600);
@@ -101,8 +101,8 @@ namespace Volon.Actor
             if (Input.GetKeyState(Keys.D))
             {
                 IsDescentFlag = true;
-                //descentPower = 10.0f;
-                //position.Y += descentPower;
+                descentPower = 10.0f;
+                position.Y += descentPower;
             }
             if (position.Y >= Screen.Height - 64)
             {
@@ -117,7 +117,6 @@ namespace Volon.Actor
             //PosY += Acc;
 
             //UpdateMotion();
-
         }
 
 
@@ -158,17 +157,17 @@ namespace Volon.Actor
                     power += -0.2f;
                     position.Y += power;
                 }
-               　else if (seconds >=20)
+                else if (seconds >= 20)
                 {
                     power += 0.3f;
                     position.Y += power;
                 }
             }
-            else if (isDeadFlag == true)
-            {
-                descentPower = 10.0f;
-                position.Y += descentPower;
-            }
+            //else if (isDeadFlag == true)
+            //{
+            //    descentPower = 10.0f;
+            //    position.Y += descentPower;
+            //}
         }
 
 

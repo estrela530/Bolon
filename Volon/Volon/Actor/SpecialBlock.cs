@@ -16,7 +16,7 @@ namespace Volon.Actor
         private float speed;
 
         public SpecialBlock(Vector2 position, IGameMediator mediator)
-            : base("SpecialBlock", mediator)
+            : base("SpecialBlock", 120, 35, mediator)
         {
             speed = 6;
 

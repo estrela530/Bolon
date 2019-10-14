@@ -17,7 +17,7 @@ namespace Volon.Actor
         private Random rnd = new Random();
 
         public ThornsBlock(Vector2 position, IGameMediator mediator)
-            : base("ThornBlock", mediator)
+            : base("ThornBlock", 200, 120, mediator)
         {
             speed = rnd.Next(3, 5);
 
