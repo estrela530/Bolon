@@ -14,21 +14,21 @@ namespace Volon.Actor
     {
 
         private float speed;
-        private Random rnd=new Random();
+        private Random rnd = new Random();
 
 
-        public NormalBlock(Vector2 position,IGameMediator mediator)
-            : base("NormalBlock", mediator)
+        public NormalBlock(Vector2 position, IGameMediator mediator)
+            : base("NormalBlock", 200, 50, mediator)
         {
             speed = rnd.Next(3, 5);
-            this.position=position;
-            isDeadFlag = false;//
+            this.position = position;
+            isDeadFlag = false;
         }
 
         public override void Initialize()
         {
             speed = rnd.Next(3, 5);
-            isDeadFlag = false;//
+            isDeadFlag = false;
         }
 
         public override void Shutdown()
@@ -42,7 +42,7 @@ namespace Volon.Actor
             {
                 isDeadFlag = true;
             }
-            //
+            
             Move();
         }
         public override void Hit(Character other)
@@ -58,5 +58,7 @@ namespace Volon.Actor
         {
             position.X -= speed;
         }
+
+
     }
 }

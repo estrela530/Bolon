@@ -43,7 +43,7 @@ namespace Volon.Actor
         private Dictionary<Direction, Range> directionRange;
 
         public Player(IGameMediator mediator)
-              : base("Player", mediator)
+              : base("Player", 60, 60, mediator)
 
         {
             position = new Vector2(100, 600);
@@ -56,13 +56,7 @@ namespace Volon.Actor
         public override void Initialize()
         {
             position = new Vector2(0, 0);
-            directionRange = new Dictionary<Direction, Range>()
-            {
-                {Direction.Down,new Range(0,3) },
-                {Direction.UP,new Range(4,7) },
-                {Direction.RIGHT,new Range(8,11) },
-                {Direction.LEFT,new Range(12,15) }
-            };
+            
             timer = new CountDownTimer(2);
             descentPower = 0;
         }
@@ -83,7 +77,7 @@ namespace Volon.Actor
 
             //移動用メソッド実装
             PlayerRiseMove();
-            Console.WriteLine("position.Y = " + position.Y);
+            //Console.WriteLine("position.Y = " + position.Y);
 
             //if (Input.GetKeyState(Keys.D))
             //{
@@ -101,8 +95,8 @@ namespace Volon.Actor
             if (Input.GetKeyState(Keys.D))
             {
                 IsDescentFlag = true;
-                //descentPower = 10.0f;
-                //position.Y += descentPower;
+                descentPower = 10.0f;
+                position.Y += descentPower;
             }
             if (position.Y >= Screen.Height - 64)
             {
@@ -112,12 +106,7 @@ namespace Volon.Actor
                 firstPower = -15.0f;
             }
 
-            //Acc = JP;
-            //Acc -= GV;
-            //PosY += Acc;
-
-            //UpdateMotion();
-
+            
         }
 
 
@@ -158,17 +147,17 @@ namespace Volon.Actor
                     power += -0.2f;
                     position.Y += power;
                 }
-               　else if (seconds >=20)
+                else if (seconds >= 20)
                 {
                     power += 0.3f;
                     position.Y += power;
                 }
             }
-            else if (isDeadFlag == true)
-            {
-                descentPower = 10.0f;
-                position.Y += descentPower;
-            }
+            //else if (isDeadFlag == true)
+            //{
+            //    descentPower = 10.0f;
+            //    position.Y += descentPower;
+            //}
         }
 
 
@@ -194,29 +183,6 @@ namespace Volon.Actor
         {
             this.direction = direction;
         }
-        private void UpdateMotion()
-        {
-            Vector2 velocity = Input.Velocity();
-            if (velocity.Length() <= 0.0f)
-            {
-                return;
-            }
-            if ((velocity.Y > 0.0f) && (direction != Direction.Down))
-            {
-                ChangeMotion(Direction.Down);
-            }
-            else if ((velocity.Y < 0.0f) && (direction != Direction.UP))
-            {
-                ChangeMotion(Direction.UP);
-            }
-            else if ((velocity.X > 0.0f) && (direction != Direction.RIGHT))
-            {
-                ChangeMotion(Direction.RIGHT);
-            }
-            else if ((velocity.X < 0.0f) && (direction != Direction.LEFT))
-            {
-                ChangeMotion(Direction.LEFT);
-            }
-        }
+        
     }
 }
