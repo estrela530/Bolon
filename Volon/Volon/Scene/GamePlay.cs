@@ -34,8 +34,9 @@ namespace Volon.Scene
         //ここから下追加
         private BlockManager blockManager;
         private int back, back2, back3, back4, back5, back6;
-        private int intervalNormal, intervalGravity, intervalThorns, intervalSpecial;
+        private int interval, num, num2;
         private Random rnd = new Random();
+        private List<int> numbers;
         //ここから上追加
 
         public GamePlay()
@@ -63,6 +64,11 @@ namespace Volon.Scene
             renderer.DrawTexture("cloud2", new Vector2(back6, 0), 0.3f);
             blockManager.Draw(renderer);
             //ここから下追加
+            numbers = new List<int>();
+            for (int i = 2; i < 6; i++)
+            {
+                numbers.Add(i);
+            }
             //ここから上追加
             renderer.End();
         }
@@ -87,10 +93,8 @@ namespace Volon.Scene
             back6 = 1280;
 
             //rnd = new Random();//ランダム生成
-            intervalNormal = 0;//間隔時間を0に
-            intervalGravity = 0;
-            intervalThorns = 0;
-            intervalSpecial = 0;
+            interval = 0;
+            num2 = 0;
             //ここから上追加
         }
 
@@ -121,29 +125,39 @@ namespace Volon.Scene
             //ここから下追加
             blockManager.Update(gameTime);
             #region ランダム生成
-            intervalNormal++;
-            intervalGravity++;
-            intervalThorns++;
-            intervalSpecial++;
-            if (intervalNormal >= rnd.Next(200, 250))
+            if (numbers.Count == 0)
             {
-                blockManager.Add(new NormalBlock(new Vector2(1280, (rnd.Next(2, 5)*100)), igameMediator));
-                intervalNormal = 0;
+                for (int i = 2; i < 6; i++)
+                {
+                    numbers.Add(i);
+                }
             }
-            if (intervalGravity >= rnd.Next(400, 500))
+            num = numbers[rnd.Next(numbers.Count)];
+            numbers.RemoveAt(num - 2);
+            interval++;
+            if (interval >= rnd.Next(150, 250) && num2 == 0 ||
+                interval >= rnd.Next(150, 250) && num2 == 2)
             {
-                blockManager.Add(new GravityBlock(new Vector2(1280, (rnd.Next(2, 5) * 100)), igameMediator));
-                intervalGravity = 0;
+                blockManager.Add(new NormalBlock(new Vector2(1280, (num * 100)), igameMediator));
+                interval = 0;
+                num2+=rnd.Next(0,2);
             }
-            if (intervalThorns >= rnd.Next(300, 400))
+            if (interval >= rnd.Next(150, 250) && num2 == 1)
             {
-                blockManager.Add(new ThornsBlock(new Vector2(1280, (rnd.Next(2, 5) * 100)), igameMediator));
-                intervalThorns = 0;
+                blockManager.Add(new ThornsBlock(new Vector2(1280, (num * 100)), igameMediator));
+                interval = 0;
+                num2++;
             }
-            if (intervalSpecial >= rnd.Next(700, 800))
+            if (interval >= rnd.Next(150, 250) && num2 == 3)
             {
-                blockManager.Add(new SpecialBlock(new Vector2(1280, (rnd.Next(2, 5) * 100)), igameMediator));
-                intervalSpecial = 0;
+                blockManager.Add(new GravityBlock(new Vector2(1280, (num * 100)), igameMediator));
+                interval = 0;
+                num2++;
+            }
+            if (num2==4)
+            {
+                blockManager.Add(new SpecialBlock(new Vector2(1280, (rnd.Next(3,6) * 100)), igameMediator));
+                num2 = 0;
             }
             #endregion
             #region 背景
