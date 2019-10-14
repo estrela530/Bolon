@@ -34,7 +34,7 @@ namespace Volon.Scene
         //ここから下追加
         private BlockManager blockManager;
         private int back, back2, back3, back4, back5, back6;
-        private int intervalNormal;
+        private int intervalNormal, intervalGravity, intervalThorns, intervalSpecial;
         private Random rnd = new Random();
         //ここから上追加
 
@@ -88,6 +88,9 @@ namespace Volon.Scene
 
             //rnd = new Random();//ランダム生成
             intervalNormal = 0;//間隔時間を0に
+            intervalGravity = 0;
+            intervalThorns = 0;
+            intervalSpecial = 0;
             //ここから上追加
         }
 
@@ -119,10 +122,28 @@ namespace Volon.Scene
             blockManager.Update(gameTime);
             #region ランダム生成
             intervalNormal++;
-            if (intervalNormal >= rnd.Next(90, 160))
+            intervalGravity++;
+            intervalThorns++;
+            intervalSpecial++;
+            if (intervalNormal >= rnd.Next(200, 250))
             {
-                blockManager.Add(new NormalBlock(new Vector2(1280, (rnd.Next(4, 11)*50)), igameMediator));
+                blockManager.Add(new NormalBlock(new Vector2(1280, (rnd.Next(2, 5)*100)), igameMediator));
                 intervalNormal = 0;
+            }
+            if (intervalGravity >= rnd.Next(400, 500))
+            {
+                blockManager.Add(new GravityBlock(new Vector2(1280, (rnd.Next(2, 5) * 100)), igameMediator));
+                intervalGravity = 0;
+            }
+            if (intervalThorns >= rnd.Next(300, 400))
+            {
+                blockManager.Add(new ThornsBlock(new Vector2(1280, (rnd.Next(2, 5) * 100)), igameMediator));
+                intervalThorns = 0;
+            }
+            if (intervalSpecial >= rnd.Next(700, 800))
+            {
+                blockManager.Add(new SpecialBlock(new Vector2(1280, (rnd.Next(2, 5) * 100)), igameMediator));
+                intervalSpecial = 0;
             }
             #endregion
             #region 背景

@@ -25,7 +25,7 @@ namespace Volon.Actor
 
         public override void Initialize()
         {
-
+            isDeadFlag = false;
         }
 
         public override void Shutdown()
@@ -34,6 +34,12 @@ namespace Volon.Actor
 
         public override void Update(GameTime gameTime)
         {
+            //x軸500以下で死亡
+            if (position.X <= 500)
+            {
+                isDeadFlag = true;
+            }
+            //
             Move();
         }
         public override void Hit(Character other)

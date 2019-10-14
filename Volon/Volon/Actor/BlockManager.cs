@@ -76,6 +76,21 @@ namespace Volon.Actor
                     tuika.Initialize();
                     blocks.Add(tuika);
                 }
+                else if (tuika is SpecialBlock)
+                {
+                    tuika.Initialize();
+                    blocks.Add(tuika);
+                }
+                else if (tuika is GravityBlock)
+                {
+                    tuika.Initialize();
+                    blocks.Add(tuika);
+                }
+                else if (tuika is ThornsBlock)
+                {
+                    tuika.Initialize();
+                    blocks.Add(tuika);
+                }
             }
             addNewList.Clear();
 
