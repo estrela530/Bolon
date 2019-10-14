@@ -44,20 +44,40 @@ namespace Volon.Actor
         {
             renderer.DrawTexture(name, position);
         }
-        public bool IsCollision(Character other)
-        {
-            float length = (position - other.position).Length();
+        //public bool IsCollision(Character other)
+        //{
+        //    float length = (position - other.position).Length();
 
-            float radiusSum = 64f;
-            if (length <= radiusSum)
-            {
-                return true;
-            }
-            return false;
-        }
+        //    float radiusSum = 64f;
+        //    if (length <= radiusSum)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
         public void SetPosition(ref Vector2 other)
         {
             other = position;
+        }
+
+        public Rectangle GetRectangle()
+        {
+            //矩形の生成
+            Rectangle area = new Rectangle();
+
+            //位置と幅、高さを設定
+            area.X = (int)position.X;
+            area.Y = (int)position.Y;
+            area.Height = height;
+            area.Width = width;
+
+            return area;
+        }
+
+        public bool IsCollision(Character other)
+        {
+            //RectangleクラスのIntersectsメソッドで重なり判定
+            return this.GetRectangle().Intersects(other.GetRectangle());
         }
     }
 
