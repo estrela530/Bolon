@@ -25,10 +25,6 @@ namespace Volon.Actor
         private Timer timer;
         private GameTime gameTime;
         private float seconds = 0;
-        float Acc = 0.0f;//加速度
-        float PosY = 0.0f;//y座標
-        float JP = 100.0f;
-        float GV = 0.98f;
         float power = 0;
         float firstPower = -2.0f;
         float descentPower = 0;
@@ -92,7 +88,7 @@ namespace Volon.Actor
             //    power = 0;
             //}
 
-            if (Input.GetKeyState(Keys.D))
+            if (Input.GetKeyTrigger(Keys.D))
             {
                 IsDescentFlag = true;                
                 //descentPower = 10.0f;
@@ -193,7 +189,6 @@ namespace Volon.Actor
             {
                 descentPower = 20.0f;
                 position.Y += descentPower;
-
             }
 
         }
