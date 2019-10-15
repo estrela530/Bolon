@@ -45,6 +45,7 @@ namespace Volon.Actor
             var gameDevice = GameDevice.Instance();
             sound = gameDevice.GetSound();
             IsDescentFlag = false;
+            isDeadFlag = false;
         }
 
         public override void Initialize()
@@ -52,9 +53,7 @@ namespace Volon.Actor
             position = new Vector2(0, 0);
 
             timer = new CountDownTimer(2);
-
         }
-
 
         public override void Update(GameTime gametime)
         {
@@ -71,11 +70,12 @@ namespace Volon.Actor
             }
             if (position.Y >= Screen.Height - 64)
             {
-                IsDescentFlag = false;
-                playerMoveSeconds = 0;
-                splashMountainSeconds = 0;
-                power = 0;
-                firstPower = -15.0f;
+                //IsDescentFlag = false;
+                //playerMoveSeconds = 0;
+                //splashMountainSeconds = 0;
+                //power = 0;
+                //firstPower = -15.0f;
+                isDeadFlag = true;
             }
 
             if (IsDescentFlag == true)
@@ -83,7 +83,6 @@ namespace Volon.Actor
                 SplashMountain();
             }
         }
-
 
         //Playerが昇る
         //Moveのためのメソッド
@@ -134,9 +133,7 @@ namespace Volon.Actor
             }
 
         }
-
-
-
+        
         public override void Shutdown()
         {
             sound.StopBGM();
@@ -154,7 +151,6 @@ namespace Volon.Actor
         {
             renderer.DrawTexture(name, position);
         }
-        
 
         public void SplashMountain()
         {
