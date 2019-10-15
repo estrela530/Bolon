@@ -59,7 +59,7 @@ namespace Volon.Actor
             Particle p;
             for(int i = 0;i < amount; i++)
             {
-                int angle = rnd.Next(0, 360);
+                int angle = rnd.Next(170, 210);
 
                 float speed = rnd.Next(1, maxSpeed);
 
