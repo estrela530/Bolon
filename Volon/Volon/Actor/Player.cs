@@ -24,10 +24,10 @@ namespace Volon.Actor
         private float num = 0f;
         private Timer timer;
         private GameTime gameTime;
-        private float seconds = 0;
+        private float playerMoveSeconds = 0;
+        private float splashMountainSeconds = 0;
         float power = 0;
         float firstPower = -2.0f;
-        float descentPower = 0;
 
         //当たり判定用enum
         private enum Direction
@@ -40,13 +40,11 @@ namespace Volon.Actor
 
         public Player(IGameMediator mediator)
               : base("Player", 60, 60, mediator)
-
         {
             position = new Vector2(100, 600);
             var gameDevice = GameDevice.Instance();
             sound = gameDevice.GetSound();
             IsDescentFlag = false;
-
         }
 
         public override void Initialize()
@@ -54,7 +52,7 @@ namespace Volon.Actor
             position = new Vector2(0, 0);
 
             timer = new CountDownTimer(2);
-            descentPower = 0;
+
         }
 
 
@@ -62,42 +60,24 @@ namespace Volon.Actor
         {
             //timer.Update(gameTime);
 
-            //Vector2 velocity = Input.Velocity();
-            //移動量
-            //float speed = 20.0f;
-            //position = position + Input.Velocity() * speed;
             //当たり判定
             var min = Vector2.Zero;
             var max = new Vector2(Screen.Width - 64, Screen.Height - 64);
-            //position = Vector2.Clamp(position, min, max);
 
             //移動用メソッド実装
             PlayerRiseMove();
-            //Console.WriteLine("position.Y = " + position.Y);
-
-            //if (Input.GetKeyState(Keys.D))
-            //{
-            //    IsDescentFlag = true;
-            //    descentPower = 10.0f;
-            //    position.Y += descentPower;
-            //}
-            //else if (Input.GetKeyRelease(Keys.D))
-            //{
-            //    IsDescentFlag = false;
-            //    seconds = 0;
-            //    power = 0;
-            //}
 
             if (Input.GetKeyTrigger(Keys.D))
             {
-                IsDescentFlag = true;                
+                IsDescentFlag = true;
                 //descentPower = 10.0f;
                 //position.Y += descentPower;
             }
             if (position.Y >= Screen.Height - 64)
             {
                 IsDescentFlag = false;
-                seconds = 0;
+                playerMoveSeconds = 0;
+                splashMountainSeconds = 0;
                 power = 0;
                 firstPower = -15.0f;
             }
@@ -119,9 +99,8 @@ namespace Volon.Actor
         public void PlayerRiseMove()
         {
             position.X += 3.0f;
-            seconds += 1;
+            playerMoveSeconds += 1;
 
-            //IsDesceentFlagがfalseで
             if (IsDescentFlag == false)
             {
                 #region IsTimeお試し
@@ -146,20 +125,20 @@ namespace Volon.Actor
                 #endregion
 
                 #region 恥ずかしい落下処理
-                if (seconds >= 0 && seconds < 20)
+                if (playerMoveSeconds >= 0 && playerMoveSeconds < 20)
                 {
                     power = firstPower;
                     power += -0.2f;
                     position.Y += power;
                 }
-                else if (seconds >= 20)
+                else if (playerMoveSeconds >= 20)
                 {
                     power += 0.3f;
                     position.Y += power;
                 }
                 #endregion
             }
-            
+
         }
 
 
@@ -172,7 +151,8 @@ namespace Volon.Actor
         public override void Hit(Character other)
         {
             IsDescentFlag = false;
-            seconds = 0;
+            playerMoveSeconds = 0;
+            splashMountainSeconds = 0;
             power = 0;
             firstPower = -15.0f;
         }
@@ -185,13 +165,22 @@ namespace Volon.Actor
 
         public void SplashMountain()
         {
-            if (IsDescentFlag == true)
+            splashMountainSeconds += 1;
+
+            #region 急降下
+            //初速
+            if (splashMountainSeconds >= 0 && splashMountainSeconds < 20)
             {
-                descentPower = 20.0f;
-                position.Y += descentPower;
+                power += 5.0f;
+                position.Y += power;
             }
-
+            //加速
+            else if (splashMountainSeconds >= 20)
+            {
+                power += 2.5f;
+                position.Y += power;
+            }
+            #endregion
         }
-
     }
 }

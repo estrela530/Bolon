@@ -471,6 +471,39 @@ namespace Volon.Device
                 );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">アセット名</param>
+        /// <param name="position">位置</param>
+        /// <param name="color">色</param>
+        /// <param name="rotate">回転</param>
+        /// <param name="origin">回転軸</param>
+        /// <param name="scale">拡大縮小</param>
+        public void DrawTexture(string name,Vector2 position,Color color,float rotate,Vector2 origin,
+            float scale)
+        {
+            Debug.Assert(textures.ContainsKey(name),
+    "アセット名を間違えていませんか？\n" +
+    "大文字小文字が間違ってませんか？\n" +
+    "LoadTextureで読み込んでますか？\n" +
+    "プログラムを確認してください\n");
+            spriteBatch.Draw(
+                textures[name],         // 画像
+                position,               // 位置
+                null,                   // 切り取り範囲
+                color,                  // 色
+                rotate,                 // 回転
+                origin,                 // 回転軸の位置
+                scale,                  // 拡大縮小
+                SpriteEffects.None,     // 表示反転効果
+                0.0f                   // スプライト表示深度
+                );
+
+        }
+
         //ここから上追加
+
+
     }
 }

@@ -45,6 +45,8 @@
     <Compile Include="Actor\Character.cs" />
     <Compile Include="Actor\GravityBlock.cs" />
     <Compile Include="Actor\NormalBlock.cs" />
+    <Compile Include="Actor\Particle.cs" />
+    <Compile Include="Actor\ParticleEmitter.cs" />
     <Compile Include="Actor\SpawnBlock.cs" />
     <Compile Include="Actor\SpecialBlock.cs" />
     <Compile Include="Actor\ThornsBlock.cs" />

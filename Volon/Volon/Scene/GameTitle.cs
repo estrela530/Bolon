@@ -7,6 +7,7 @@ using Volon.Device;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Volon.Actor;
 
 namespace Volon.Scene
 {
@@ -25,6 +26,8 @@ namespace Volon.Scene
         private int num;
         private float num2;//角煮用
         private SceneName nextScene;
+
+        private ParticleEmitter emitter;
         //ここから上追加
 
         /// <summary>
@@ -41,6 +44,8 @@ namespace Volon.Scene
 
             //ここから下追加
             nextScene = SceneName.GamePlay;
+
+            emitter = new ParticleEmitter();
             //ここから上追加
 
         }
@@ -49,7 +54,6 @@ namespace Volon.Scene
             renderer.Begin();
             renderer.DrawTexture("Title", Vector2.Zero);
             //うんち
-
             #region　数字//角煮用
             if ((int)num2 / 1000 <= 9 && (int)num2 / 1000 >= 1)
             {
@@ -65,6 +69,7 @@ namespace Volon.Scene
             }
             renderer.DrawNumber("number", Vector2.Zero, num2.ToString("f2"), 4);
             #endregion
+            emitter.Draw(renderer);
 
             renderer.End();
         }
@@ -99,6 +104,7 @@ namespace Volon.Scene
 
         public void Update(GameTime gameTime)
         {
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             sound.PlayBGM("VoLoN BGM");
             num2 += 1/60f;//角煮用
             if (Input.GetKeyState(Keys.Space))
@@ -119,6 +125,16 @@ namespace Volon.Scene
             {
                 num = 0;
             }
+
+            if (Input.GetKeyTrigger(Keys.A))
+            {
+                float scale = 0.5f;
+                float shrinkRote = 0.5f;
+                int speed = 500;
+                emitter.Emit("Player", new Vector2(60, 60), new Vector2(100,100),scale, shrinkRote, 2.0f, 30, speed, Color.Black);
+            }
+
+            emitter.Update(delta);
         }
     }
 }
