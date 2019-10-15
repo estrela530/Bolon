@@ -56,7 +56,7 @@ namespace Volon.Actor
         public override void Initialize()
         {
             position = new Vector2(0, 0);
-            
+
             timer = new CountDownTimer(2);
             descentPower = 0;
         }
@@ -94,9 +94,9 @@ namespace Volon.Actor
 
             if (Input.GetKeyState(Keys.D))
             {
-                IsDescentFlag = true;
-                descentPower = 10.0f;
-                position.Y += descentPower;
+                IsDescentFlag = true;                
+                //descentPower = 10.0f;
+                //position.Y += descentPower;
             }
             if (position.Y >= Screen.Height - 64)
             {
@@ -106,7 +106,12 @@ namespace Volon.Actor
                 firstPower = -15.0f;
             }
 
-            
+            if (IsDescentFlag == true)
+            {
+                SplashMountain();
+            }
+
+
         }
 
 
@@ -123,6 +128,7 @@ namespace Volon.Actor
             //IsDesceentFlagがfalseで
             if (IsDescentFlag == false)
             {
+                #region IsTimeお試し
                 //position.Y += -10.0f;
                 //if (timer.IsTime())
                 //{
@@ -141,6 +147,9 @@ namespace Volon.Actor
                 //    power += 0.3f;
                 //    position.Y += power;
                 //}
+                #endregion
+
+                #region 恥ずかしい落下処理
                 if (seconds >= 0 && seconds < 20)
                 {
                     power = firstPower;
@@ -152,12 +161,9 @@ namespace Volon.Actor
                     power += 0.3f;
                     position.Y += power;
                 }
+                #endregion
             }
-            //else if (isDeadFlag == true)
-            //{
-            //    descentPower = 10.0f;
-            //    position.Y += descentPower;
-            //}
+            
         }
 
 
@@ -179,10 +185,18 @@ namespace Volon.Actor
             renderer.DrawTexture(name, position);
         }
 
-        private void ChangeMotion(Direction direction)
+
+
+        public void SplashMountain()
         {
-            this.direction = direction;
+            if (IsDescentFlag == true)
+            {
+                descentPower = 20.0f;
+                position.Y += descentPower;
+
+            }
+
         }
-        
+
     }
 }
