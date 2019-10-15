@@ -22,6 +22,9 @@ namespace Volon.Actor
         public bool _isActive;
         public Color _color;
 
+        //追加
+        float firstSpeed;
+
         public Particle(string name,Vector2 size,Vector2 pos,float speed,float angle,float scale,float shrinkRate,float duration,Color color)
         {
             _name = name;
@@ -40,11 +43,19 @@ namespace Volon.Actor
             Matrix rot = Matrix.CreateRotationZ(angle);
             _direction = Vector2.Transform(up, rot);
 
+            //追加
+            firstSpeed = 200;
+
         }
         
         public void Update(float delta)
         {
-            _position += _direction * _speed * delta;
+            //_position += _direction * _speed * delta;
+            //_position.Y += 5f;
+
+            _position.X += _direction.X * ((firstSpeed * delta) + ((500 * delta * delta) / 2));
+            _position.Y += _direction.Y *((firstSpeed * delta) + ((_speed * delta * delta) / 2));
+            _speed -=1500f;
 
             _scale -= _shrinkRate * delta;
 

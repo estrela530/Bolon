@@ -59,12 +59,13 @@ namespace Volon.Actor
             Particle p;
             for(int i = 0;i < amount; i++)
             {
-                int angle = rnd.Next(170, 210);
+                int angle = rnd.Next(-20,20);
 
                 float speed = rnd.Next(1, maxSpeed);
 
                 p = new Particle(name,size, pos, speed, angle, scale, shrinkRate, duration, color);
-
+                pos.X += 5;
+                pos.Y += 5;
                 particles.Add(p);
             }
         }
