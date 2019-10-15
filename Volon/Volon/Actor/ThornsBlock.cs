@@ -17,7 +17,7 @@ namespace Volon.Actor
         private Random rnd = new Random();
 
         public ThornsBlock(Vector2 position, IGameMediator mediator)
-            : base("ThornBlock", 200, 120, mediator)
+            : base("ThornBlock", 200, 50, mediator)
         {
             speed = rnd.Next(3, 5);
 
@@ -37,7 +37,7 @@ namespace Volon.Actor
         public override void Update(GameTime gameTime)
         {
             //x軸500以下で死亡
-            if (position.X <= 500)
+            if (position.X <= 500 || position.Y >= 720)
             {
                 isDeadFlag = true;
             }
