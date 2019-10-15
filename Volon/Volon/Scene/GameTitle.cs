@@ -131,7 +131,7 @@ namespace Volon.Scene
                 float scale = 0.5f;
                 float shrinkRote = 0.5f;
                 int speed = 500;
-                emitter.Emit("Player", new Vector2(60, 60), new Vector2(100,100),scale, shrinkRote, 2.0f, 30, speed, Color.Black);
+                emitter.Emit("Player", new Vector2(60, 60), new Vector2(200,200),scale, shrinkRote, 2.0f, 30, speed, Color.Black);
             }
 
             emitter.Update(delta);

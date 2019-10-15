@@ -44,6 +44,7 @@
     <Compile Include="Actor\BlockManager.cs" />
     <Compile Include="Actor\Character.cs" />
     <Compile Include="Actor\GravityBlock.cs" />
+    <Compile Include="Actor\Locas.cs" />
     <Compile Include="Actor\NormalBlock.cs" />
     <Compile Include="Actor\Particle.cs" />
     <Compile Include="Actor\ParticleEmitter.cs" />
