@@ -132,33 +132,40 @@ namespace Volon.Scene
                     numbers.Add(i);
                 }
             }
-            num = numbers[rnd.Next(numbers.Count)];
-            numbers.RemoveAt(num - 2);
             interval++;
             if (interval >= rnd.Next(150, 250) && num2 == 0 ||
                 interval >= rnd.Next(150, 250) && num2 == 2)
             {
+                num = numbers[rnd.Next(numbers.Count)];
                 blockManager.Add(new NormalBlock(new Vector2(1280, (num * 100)), igameMediator));
+                numbers.RemoveAll(c => c.ToString().Contains(num.ToString()));
                 interval = 0;
                 num2+=rnd.Next(0,2);
             }
             if (interval >= rnd.Next(150, 250) && num2 == 1)
             {
+                num = numbers[rnd.Next(numbers.Count)];
                 blockManager.Add(new ThornsBlock(new Vector2(1280, (num * 100)), igameMediator));
+                numbers.RemoveAll(c => c.ToString().Contains(num.ToString()));
                 interval = 0;
                 num2++;
             }
             if (interval >= rnd.Next(150, 250) && num2 == 3)
             {
+                num = numbers[rnd.Next(numbers.Count)];
                 blockManager.Add(new GravityBlock(new Vector2(1280, (num * 100)), igameMediator));
+                numbers.RemoveAll(c => c.ToString().Contains(num.ToString()));
                 interval = 0;
                 num2++;
             }
             if (num2==4)
             {
-                blockManager.Add(new SpecialBlock(new Vector2(1280, (rnd.Next(3,6) * 100)), igameMediator));
+                num = numbers[rnd.Next(numbers.Count)];
+                blockManager.Add(new SpecialBlock(new Vector2(1280, (num * 100)), igameMediator));
+                numbers.RemoveAll(c => c.ToString().Contains(num.ToString()));
                 num2 = 0;
             }
+            
             #endregion
             #region 背景
             back -= 1;
@@ -193,6 +200,9 @@ namespace Volon.Scene
             }
             #endregion
             //ここから上追加
+            Console.WriteLine("num = " + num);
+            //Console.WriteLine("num2 = " + num2);
+
         }
     }
 }

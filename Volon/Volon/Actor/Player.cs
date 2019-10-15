@@ -58,8 +58,6 @@ namespace Volon.Actor
 
         public override void Update(GameTime gametime)
         {
-            //timer.Update(gameTime);
-
             //当たり判定
             var min = Vector2.Zero;
             var max = new Vector2(Screen.Width - 64, Screen.Height - 64);
@@ -70,8 +68,6 @@ namespace Volon.Actor
             if (Input.GetKeyTrigger(Keys.D))
             {
                 IsDescentFlag = true;
-                //descentPower = 10.0f;
-                //position.Y += descentPower;
             }
             if (position.Y >= Screen.Height - 64)
             {
@@ -86,15 +82,13 @@ namespace Volon.Actor
             {
                 SplashMountain();
             }
-
-
         }
 
 
-        //Playerが昇る動きと押したら降下
-        //するMoveのためのメソッド
+        //Playerが昇る
+        //Moveのためのメソッド
         /// <summary>
-        /// 上下メソッド
+        /// 上昇メソッド
         /// </summary>
         public void PlayerRiseMove()
         {
@@ -160,14 +154,12 @@ namespace Volon.Actor
         {
             renderer.DrawTexture(name, position);
         }
-
-
+        
 
         public void SplashMountain()
         {
-            splashMountainSeconds += 1;
-
             #region 急降下
+            splashMountainSeconds += 1;
             //初速
             if (splashMountainSeconds >= 0 && splashMountainSeconds < 20)
             {
