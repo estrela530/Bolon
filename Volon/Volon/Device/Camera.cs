@@ -26,7 +26,6 @@ namespace Volon.Device
         public static void SetPosition(Vector2 pos)
         {
             position = pos;
-            position = Vector2.Clamp(position, min, max);
         }
 
        
