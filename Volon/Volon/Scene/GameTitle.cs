@@ -46,6 +46,7 @@ namespace Volon.Scene
             nextScene = SceneName.GamePlay;
 
             emitter = new ParticleEmitter();
+
             //ここから上追加
 
         }
@@ -104,7 +105,6 @@ namespace Volon.Scene
 
         public void Update(GameTime gameTime)
         {
-            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             sound.PlayBGM("VoLoN BGM");
             num2 += 1/60f;//角煮用
             if (Input.GetKeyState(Keys.Space))
@@ -126,12 +126,16 @@ namespace Volon.Scene
                 num = 0;
             }
 
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             if (Input.GetKeyTrigger(Keys.A))
             {
                 float scale = 0.5f;
-                float shrinkRote = 0.5f;
-                int speed = 500;
-                emitter.Emit("Player", new Vector2(60, 60), new Vector2(100,100),scale, shrinkRote, 2.0f, 30, speed, Color.Black);
+                float shrinkRote = 0.3f;
+                int speed = 200;
+                emitter.Emit("Player", new Vector2(60, 60),
+                    new Vector2(500,300),
+                    scale, shrinkRote, 1f, 1, speed, Color.Blue);
             }
 
             emitter.Update(delta);

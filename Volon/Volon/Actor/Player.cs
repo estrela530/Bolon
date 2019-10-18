@@ -29,6 +29,14 @@ namespace Volon.Actor
         float power = 0;
         float firstPower = -2.0f;
 
+        //追加
+        private Vector2 previousPos;
+        private Vector2 currentPos;
+        private float distance;
+
+        private ParticleEmitter emitter;
+        private Vector2 assetSize;
+
         //当たり判定用enum
         private enum Direction
         {
@@ -45,6 +53,11 @@ namespace Volon.Actor
             var gameDevice = GameDevice.Instance();
             sound = gameDevice.GetSound();
             IsDescentFlag = false;
+            isDeadFlag = false;
+
+            //追加
+            assetSize = new Vector2(60, 60);
+            emitter = new ParticleEmitter();
         }
 
         public override void Initialize()
@@ -52,12 +65,12 @@ namespace Volon.Actor
             position = new Vector2(0, 0);
 
             timer = new CountDownTimer(2);
-
         }
-
 
         public override void Update(GameTime gametime)
         {
+            float delta = (float)gametime.ElapsedGameTime.TotalSeconds;        
+
             //当たり判定
             var min = Vector2.Zero;
             var max = new Vector2(Screen.Width - 64, Screen.Height - 64);
@@ -71,19 +84,27 @@ namespace Volon.Actor
             }
             if (position.Y >= Screen.Height - 64)
             {
-                IsDescentFlag = false;
-                playerMoveSeconds = 0;
-                splashMountainSeconds = 0;
-                power = 0;
-                firstPower = -15.0f;
+                //IsDescentFlag = false;
+                //playerMoveSeconds = 0;
+                //splashMountainSeconds = 0;
+                //power = 0;
+                //firstPower = -15.0f;
+                isDeadFlag = true;
             }
 
             if (IsDescentFlag == true)
             {
                 SplashMountain();
             }
-        }
 
+            //追加
+            if(isDeadFlag == false)
+            {
+                emitter.Emit("Player",assetSize, position + assetSize / 2, 0.5f, 0.5f, 2f, 1, 600, Color.Black);
+
+            }
+            emitter.Update(delta);
+        }
 
         //Playerが昇る
         //Moveのためのメソッド
@@ -92,6 +113,18 @@ namespace Volon.Actor
         /// </summary>
         public void PlayerRiseMove()
         {
+            ////今と前のポジション受け取り
+            //previousPos = currentPos;
+            //currentPos = position;
+
+            ////距離
+            //distance = Vector2.Distance(currentPos, previousPos);
+
+            ////速さ？
+            //float speed = distance / playerMoveSeconds;
+
+
+
             position.X += 3.0f;
             playerMoveSeconds += 1;
 
@@ -118,7 +151,7 @@ namespace Volon.Actor
                 //}
                 #endregion
 
-                #region 恥ずかしい落下処理
+                #region 恥ずかしい上昇処理
                 if (playerMoveSeconds >= 0 && playerMoveSeconds < 20)
                 {
                     power = firstPower;
@@ -132,11 +165,18 @@ namespace Volon.Actor
                 }
                 #endregion
             }
+            //パーティクル確認用
+            if (Input.GetKeyTrigger(Keys.F))
+            {
+                IsDescentFlag = false;
+                playerMoveSeconds = 0;
+                splashMountainSeconds = 0;
+                power = 0;
+                firstPower = -15.0f;
+            }
 
         }
-
-
-
+        
         public override void Shutdown()
         {
             sound.StopBGM();
@@ -152,9 +192,11 @@ namespace Volon.Actor
         }
         public override void Draw(Renderer renderer)
         {
+            //追加
+            emitter.Draw(renderer);
+
             renderer.DrawTexture(name, position);
         }
-        
 
         public void SplashMountain()
         {

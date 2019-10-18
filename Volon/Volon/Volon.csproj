@@ -44,6 +44,7 @@
     <Compile Include="Actor\BlockManager.cs" />
     <Compile Include="Actor\Character.cs" />
     <Compile Include="Actor\GravityBlock.cs" />
+    <Compile Include="Actor\Locas.cs" />
     <Compile Include="Actor\NormalBlock.cs" />
     <Compile Include="Actor\Particle.cs" />
     <Compile Include="Actor\ParticleEmitter.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Actor\SpecialBlock.cs" />
     <Compile Include="Actor\ThornsBlock.cs" />
     <Compile Include="Def\Screen.cs" />
+    <Compile Include="Device\Camera.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Device\Input.cs" />
     <Compile Include="Device\Loader.cs" />
