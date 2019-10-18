@@ -17,7 +17,7 @@ namespace Volon.Actor
         private Random rnd = new Random();
 
         public GravityBlock(Vector2 position, IGameMediator mediator)
-            : base("GravityBlock", 200, 50, mediator)
+            : base("GravityBlock", 200, 50,0,0, mediator)
         {
             speed = rnd.Next(3, 5);
 
@@ -27,7 +27,7 @@ namespace Volon.Actor
         public override void Initialize()
         {
             isDeadFlag = false;
-            speed = rnd.Next(3, 5);
+            speed = rnd.Next(5,7);
         }
 
         public override void Shutdown()
