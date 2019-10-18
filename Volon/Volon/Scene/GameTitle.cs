@@ -28,6 +28,8 @@ namespace Volon.Scene
         private SceneName nextScene;
 
         private ParticleEmitter emitter;
+        private Vector2 vector;
+        private float scale, scale2;
         //ここから上追加
 
         /// <summary>
@@ -44,9 +46,9 @@ namespace Volon.Scene
 
             //ここから下追加
             nextScene = SceneName.GamePlay;
-
             emitter = new ParticleEmitter();
-
+            scale = 0.01f;
+            vector = new Vector2(scale);
             //ここから上追加
 
         }
@@ -54,7 +56,6 @@ namespace Volon.Scene
         {
             renderer.Begin();
             renderer.DrawTexture("Title", Vector2.Zero);
-            //うんち
             #region　数字//角煮用
             if ((int)num2 / 1000 <= 9 && (int)num2 / 1000 >= 1)
             {
@@ -71,6 +72,8 @@ namespace Volon.Scene
             renderer.DrawNumber("number", Vector2.Zero, num2.ToString("f2"), 4);
             #endregion
             emitter.Draw(renderer);
+            renderer.DrawTexture("Circle", new Vector2(450), 0.4f);
+            renderer.DrawTexture("Circle", new Vector2(scale2), vector);
 
             renderer.End();
         }
@@ -81,7 +84,10 @@ namespace Volon.Scene
             num2 = 0.0f;//角煮用
             nextScene = SceneName.GamePlay;
             isEndFlag = false;
-            
+
+            scale = 0.01f;
+            scale2 = 500;
+            vector = new Vector2(scale);
         }
 
         /// <summary>
@@ -105,6 +111,18 @@ namespace Volon.Scene
 
         public void Update(GameTime gameTime)
         {
+            if (Input.GetKeyState(Keys.Space))
+            {
+                scale += 0.01f;
+                scale2 -= 0.5f;
+            }
+            if (Input.GetKeyRelease(Keys.Space))
+            {
+                scale = 0.01f;
+                scale2 = 500;
+            }
+            vector = new Vector2(scale);
+
             sound.PlayBGM("VoLoN BGM");
             num2 += 1/60f;//角煮用
             if (Input.GetKeyState(Keys.Space))
@@ -115,7 +133,7 @@ namespace Volon.Scene
             {
                 isEndFlag = true;
             }
-            if (Input.GetKeyRelease(Keys.Space) && num >= 60)
+            if (Input.GetKeyState(Keys.Space) && num >= 100)
             {
                 nextScene = SceneName.Tutorial;
                 isEndFlag = true;

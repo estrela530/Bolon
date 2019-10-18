@@ -59,6 +59,8 @@ namespace Volon.Scene
                 {"background1",path},
                 {"cloud",path},
                 {"cloud2",path},
+                {"Circle",path},
+                {"しらす",path},
             };
 
             return data;

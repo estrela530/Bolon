@@ -55,7 +55,7 @@ namespace Volon.Actor
 
         public override void Initialize()
         {
-            position = new Vector2(0, 0);
+            position = new Vector2(150, 0);
 
             timer = new CountDownTimer(2);
         }
@@ -112,7 +112,7 @@ namespace Volon.Actor
 
 
 
-            position.X += 3.0f;
+            //position.X += 3.0f;
             playerMoveSeconds += 1;
 
             if (IsDescentFlag == false)
