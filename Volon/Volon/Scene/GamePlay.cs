@@ -162,7 +162,7 @@ namespace Volon.Scene
             {
                 num = numbers[rnd.Next(numbers.Count)];
                 blockManager.Add(new SpecialBlock(new Vector2(1280, (num * 100)), igameMediator));
-                numbers.RemoveAll(c => c.ToString().Contains(num.ToString()));
+                numbers.RemoveAll(c => c.ToString().Contains(num.ToString())); 
                 num2 = 0;
             }
             

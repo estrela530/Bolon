@@ -17,19 +17,15 @@ namespace Volon.Actor
     {
         //フィールド
         private Sound sound;
-        private float riseSpeed;
-        private bool blockJumpNow;
-        private float gravity = 5.0f;
         public static bool IsDescentFlag;
         private float num = 0f;
         private Timer timer;
-        private GameTime gameTime;
         private float playerMoveSeconds = 0;
         private float splashMountainSeconds = 0;
         float power = 0;
         float firstPower = -2.0f;
 
-        //追加
+        //追加 かいと
         private Vector2 previousPos;
         private Vector2 currentPos;
         private float distance;
@@ -42,9 +38,6 @@ namespace Volon.Actor
         {
             Down, UP, RIGHT, LEFT
         };
-        private Direction direction;
-
-        private Dictionary<Direction, Range> directionRange;
 
         public Player(IGameMediator mediator)
               : base("Player", 60, 60, mediator)
@@ -69,7 +62,7 @@ namespace Volon.Actor
 
         public override void Update(GameTime gametime)
         {
-            float delta = (float)gametime.ElapsedGameTime.TotalSeconds;        
+            float delta = (float)gametime.ElapsedGameTime.TotalSeconds;
 
             //当たり判定
             var min = Vector2.Zero;
@@ -84,12 +77,7 @@ namespace Volon.Actor
             }
             if (position.Y >= Screen.Height - 64)
             {
-                //IsDescentFlag = false;
-                //playerMoveSeconds = 0;
-                //splashMountainSeconds = 0;
-                //power = 0;
-                //firstPower = -15.0f;
-                isDeadFlag = true;
+                //isDeadFlag = true;
             }
 
             if (IsDescentFlag == true)
@@ -98,10 +86,9 @@ namespace Volon.Actor
             }
 
             //追加
-            if(isDeadFlag == false)
+            if (isDeadFlag == false)
             {
-                emitter.Emit("Player",assetSize, position + assetSize / 2, 0.5f, 0.5f, 2f, 1, 600, Color.Black);
-
+                emitter.Emit("Player", assetSize, position + assetSize / 2, 0.5f, 0.5f, 2f, 1, 600, Color.Black);
             }
             emitter.Update(delta);
         }
@@ -152,7 +139,7 @@ namespace Volon.Actor
                 #endregion
 
                 #region 恥ずかしい上昇処理
-                if (playerMoveSeconds >= 0 && playerMoveSeconds < 20)
+                if (playerMoveSeconds >= -100 && playerMoveSeconds < 20)
                 {
                     power = firstPower;
                     power += -0.2f;
@@ -165,6 +152,8 @@ namespace Volon.Actor
                 }
                 #endregion
             }
+
+            #region　恥ずかしいパーティクル確認用
             //パーティクル確認用
             if (Input.GetKeyTrigger(Keys.F))
             {
@@ -174,9 +163,9 @@ namespace Volon.Actor
                 power = 0;
                 firstPower = -15.0f;
             }
-
+            #endregion
         }
-        
+
         public override void Shutdown()
         {
             sound.StopBGM();
@@ -184,11 +173,38 @@ namespace Volon.Actor
 
         public override void Hit(Character other)
         {
-            IsDescentFlag = false;
-            playerMoveSeconds = 0;
-            splashMountainSeconds = 0;
-            power = 0;
-            firstPower = -15.0f;
+            if (other is NormalBlock)
+            {
+                IsDescentFlag = false;
+                playerMoveSeconds = 0;
+                splashMountainSeconds = 0;
+                power = 0;
+                firstPower = -15.0f;
+            }
+            else if (other is GravityBlock)
+            {
+                IsDescentFlag = false;
+                playerMoveSeconds = 0;
+                splashMountainSeconds = 0;
+                power = 0;
+                firstPower = -5.0f;
+            }
+            else if (other is SpecialBlock)
+            {
+                IsDescentFlag = false;
+                playerMoveSeconds = -50;
+                splashMountainSeconds = 0;
+                power = 0;
+                firstPower = -30.0f;
+            }
+            else if (other is ThornsBlock)
+            {
+                IsDescentFlag = false;
+                playerMoveSeconds = 0;
+                splashMountainSeconds = 0;
+                power = 0;
+                firstPower = -15.0f;
+            }
         }
         public override void Draw(Renderer renderer)
         {
