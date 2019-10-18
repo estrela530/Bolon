@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Volon.Device;
 using Microsoft.Xna.Framework.Input;
-
+using Volon.Actor;
 
 namespace Volon.Scene
 {
@@ -18,6 +18,12 @@ namespace Volon.Scene
         private bool IsEndFlag;//終了フラグ
         private bool on;
 
+        private SceneName nextScene;
+
+        private Random rnd;
+        private ParticleEmitter emitter;
+
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -25,6 +31,10 @@ namespace Volon.Scene
         {
             IsEndFlag = false;
             on = false;
+
+            nextScene = SceneName.GamePlay;
+            emitter = new ParticleEmitter();
+
         }
 
         /// <summary>
@@ -36,6 +46,7 @@ namespace Volon.Scene
             renderer.Begin();
 
             renderer.DrawTexture("Ending", Vector2.Zero);
+            emitter.Draw(renderer);
 
             renderer.End();
         }
@@ -88,6 +99,20 @@ namespace Volon.Scene
             {
                 IsEndFlag = true;
             }
+
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (Input.GetKeyTrigger(Keys.A))
+            {
+                float scale = 0.2f;
+                float shrinkRote = 0.3f;
+                int speed = 200;
+                emitter.Emit("Player", new Vector2(60, 60),
+                    new Vector2(500, 300),
+                    scale, shrinkRote, 0.7f, 10, speed, Color.Blue);
+            }
+
+            emitter.Update(delta);
         }
     }
 }

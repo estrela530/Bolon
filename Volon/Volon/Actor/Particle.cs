@@ -45,25 +45,24 @@ namespace Volon.Actor
             _direction = Vector2.Transform(up, rot);
 
             //追加
-            firstSpeed = 200;
+            firstSpeed = 7;
             alpha = 1.0f;
 
         }
         
         public void Update(float delta)
         {
-            _position += _direction * _speed * delta;
-            //_position.Y += 50f;
+            //_position += _direction * _speed * delta;
 
-            //_position.X += _direction.X * ((firstSpeed * delta) + ((500 * delta * delta) / 2));
-            //_position.Y += _direction.Y *((firstSpeed * delta) + ((_speed * delta * delta) / 2));
-            //_speed -=1500f;
+            _position.X += _direction.X * _speed * delta;
+            _position.Y += _direction.Y * firstSpeed;
+            firstSpeed -= 0.3f;
 
             //_scale -= _shrinkRate * delta;
 
             _duration -= delta;
-            alpha -= delta;
-            _color *= alpha;
+            //alpha -= delta;
+            //_color *= alpha;
 
             if (_scale <= 0.0f || _duration <= 0.0f)
             {

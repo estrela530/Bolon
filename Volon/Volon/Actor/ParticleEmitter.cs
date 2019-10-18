@@ -65,14 +65,14 @@ namespace Volon.Actor
         /// <param name="amount">数</param>
         /// <param name="maxSpeed">速さ</param>
         /// <param name="color">色</param>
+        /// <param name="angle">角度</param>
         public void Emit(string name,Vector2 size,Vector2 pos,float scale,float shrinkRate,
-            float duration,int amount,int maxSpeed,Color color)
+            float duration,int amount,int maxSpeed,Color color,int angle)
         {
             Particle p;
             for(int i = 0;i < amount; i++)
             {
                 //int angle = rnd.Next(260,280);
-                int angle = 270;
 
                 //float speed = rnd.Next(1, maxSpeed);
                 float speed = maxSpeed;
@@ -81,5 +81,35 @@ namespace Volon.Actor
                 particles.Add(p);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">画像名</param>
+        /// <param name="size">画像のサイズ</param>
+        /// <param name="pos">位置</param>
+        /// <param name="scale">大きさ</param>
+        /// <param name="shrinkRate">収縮時間</param>
+        /// <param name="duration">寿命</param>
+        /// <param name="amount">数</param>
+        /// <param name="maxSpeed">速さ</param>
+        /// <param name="color">色</param>
+        public void Emit(string name, Vector2 size, Vector2 pos, float scale, float shrinkRate,
+            float duration, int amount, int maxSpeed, Color color)
+        {
+            Particle p;
+            pos.X -= 40;
+            for (int i = 0; i < amount; i++)
+            {
+                int angle = rnd.Next(-70,70);
+                pos.X += 8;
+                float speed = rnd.Next(1, maxSpeed);
+                //float speed = maxSpeed;
+
+                p = new Particle(name, size, pos, speed, angle, scale, shrinkRate, duration, color);
+                particles.Add(p);
+            }
+        }
+
     }
 }
