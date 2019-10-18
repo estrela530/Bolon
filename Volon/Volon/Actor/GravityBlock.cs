@@ -36,12 +36,11 @@ namespace Volon.Actor
 
         public override void Update(GameTime gameTime)
         {
-            //x軸500以下で死亡
-            if (position.X <= 500 || position.Y >= 720)
+            //x軸0以下で死亡
+            if (position.X <= 0 || position.Y >= 720)
             {
                 isDeadFlag = true;
             }
-            //
             Move();
         }
         public override void Hit(Character other)
