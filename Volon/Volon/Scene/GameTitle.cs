@@ -130,12 +130,12 @@ namespace Volon.Scene
 
             if (Input.GetKeyTrigger(Keys.A))
             {
-                float scale = 0.3f;
+                float scale = 0.5f;
                 float shrinkRote = 0.3f;
-                int speed = 500;
+                int speed = 200;
                 emitter.Emit("Player", new Vector2(60, 60),
                     new Vector2(500,300),
-                    scale, shrinkRote, 0.8f, 10, speed, Color.Blue);
+                    scale, shrinkRote, 1f, 1, speed, Color.Blue);
             }
 
             emitter.Update(delta);

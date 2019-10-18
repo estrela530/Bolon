@@ -53,19 +53,31 @@ namespace Volon.Actor
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">画像名</param>
+        /// <param name="size">画像のサイズ</param>
+        /// <param name="pos">位置</param>
+        /// <param name="scale">大きさ</param>
+        /// <param name="shrinkRate">収縮時間</param>
+        /// <param name="duration">寿命</param>
+        /// <param name="amount">数</param>
+        /// <param name="maxSpeed">速さ</param>
+        /// <param name="color">色</param>
         public void Emit(string name,Vector2 size,Vector2 pos,float scale,float shrinkRate,
             float duration,int amount,int maxSpeed,Color color)
         {
             Particle p;
             for(int i = 0;i < amount; i++)
             {
-                int angle = rnd.Next(-20,20);
+                //int angle = rnd.Next(260,280);
+                int angle = 270;
 
-                float speed = rnd.Next(1, maxSpeed);
+                //float speed = rnd.Next(1, maxSpeed);
+                float speed = maxSpeed;
 
                 p = new Particle(name,size, pos, speed, angle, scale, shrinkRate, duration, color);
-                pos.X += 5;
-                pos.Y += 5;
                 particles.Add(p);
             }
         }
