@@ -23,7 +23,9 @@ namespace Volon.Actor
         private float playerMoveSeconds = 0;
         private float splashMountainSeconds = 0;
         float power = 0;
-        float firstPower = -2.0f;
+        public float firstPower = -2.0f;
+        private float specialWidth;
+        private float specialHeight;
 
         //追加 かいと
         private Vector2 previousPos;
@@ -40,7 +42,7 @@ namespace Volon.Actor
         };
 
         public Player(IGameMediator mediator)
-              : base("Player", 60, 60, mediator)
+              : base("Player", 60, 60, 0, 0, mediator)
         {
             position = new Vector2(100, 600);
             var gameDevice = GameDevice.Instance();
@@ -55,13 +57,14 @@ namespace Volon.Actor
 
         public override void Initialize()
         {
-            position = new Vector2(0, 0);
+            position = new Vector2(150, 0);
 
             timer = new CountDownTimer(2);
         }
 
         public override void Update(GameTime gametime)
         {
+
             float delta = (float)gametime.ElapsedGameTime.TotalSeconds;
 
             //当たり判定
@@ -112,7 +115,7 @@ namespace Volon.Actor
 
 
 
-            position.X += 3.0f;
+            //position.X += 3.0f;
             playerMoveSeconds += 1;
 
             if (IsDescentFlag == false)
@@ -175,11 +178,23 @@ namespace Volon.Actor
         {
             if (other is NormalBlock)
             {
-                IsDescentFlag = false;
-                playerMoveSeconds = 0;
-                splashMountainSeconds = 0;
-                power = 0;
-                firstPower = -15.0f;
+                if (other.GetRectangle().Width >= 85 && other.GetRectangle().Width <= 200)
+                {
+                    Console.WriteLine("Width = " + other.GetRectangle().Width);
+                    IsDescentFlag = false;
+                    playerMoveSeconds = -50;
+                    splashMountainSeconds = 0;
+                    power = 0;
+                    firstPower = -30.0f;
+                }
+                else
+                {
+                    IsDescentFlag = false;
+                    playerMoveSeconds = 0;
+                    splashMountainSeconds = 0;
+                    power = 0;
+                    firstPower = -15.0f;
+                }
             }
             else if (other is GravityBlock)
             {
@@ -205,6 +220,8 @@ namespace Volon.Actor
                 power = 0;
                 firstPower = -15.0f;
             }
+            Console.WriteLine("Width = " + other.GetRectangle().Width);
+
         }
         public override void Draw(Renderer renderer)
         {

@@ -65,8 +65,10 @@ namespace Volon.Scene
             blockManager = new BlockManager();//ブロック管理者を生成
             blockManager.Add(player);
 
-            blockManager.Add(new NormalBlock(new Vector2(500, 550), igameMediator));//テンプレート
+            blockManager.Add(new NormalBlock(new Vector2(200, 550), igameMediator));//テンプレート
             blockManager.Add(new NormalBlock(new Vector2(1050, 250), igameMediator));//佐々木
+            //blockManager.Add(new SpecialBlock(new Vector2(300, 550), igameMediator));//佐々木
+
 
             back = 0;
             back2 = 0;
