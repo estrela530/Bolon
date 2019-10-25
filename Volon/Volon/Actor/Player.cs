@@ -88,12 +88,12 @@ namespace Volon.Actor
                 SplashMountain();
             }
 
-            //追加
-            if (isDeadFlag == false)
-            {
-                emitter.Emit("Player", assetSize, position + assetSize / 2, 0.5f, 0.5f, 2f, 1, 600, Color.Black);
-            }
-            emitter.Update(delta);
+            ////追加
+            //if (isDeadFlag == false)
+            //{
+            //    emitter.Emit("Player", assetSize, position + assetSize / 2, 0.5f, 0.5f, 2f, 1, 600, Color.Black);
+            //}
+            //emitter.Update(delta);
         }
 
         //Playerが昇る
@@ -178,23 +178,13 @@ namespace Volon.Actor
         {
             if (other is NormalBlock)
             {
-                if (other.GetRectangle().Width >= 85 && other.GetRectangle().Width <= 200)
-                {
-                    Console.WriteLine("Width = " + other.GetRectangle().Width);
-                    IsDescentFlag = false;
-                    playerMoveSeconds = -50;
-                    splashMountainSeconds = 0;
-                    power = 0;
-                    firstPower = -30.0f;
-                }
-                else
-                {
-                    IsDescentFlag = false;
-                    playerMoveSeconds = 0;
-                    splashMountainSeconds = 0;
-                    power = 0;
-                    firstPower = -15.0f;
-                }
+               
+                IsDescentFlag = false;
+                playerMoveSeconds = 0;
+                splashMountainSeconds = 0;
+                power = 0;
+                firstPower = -10.0f;
+            
             }
             else if (other is GravityBlock)
             {
@@ -220,8 +210,22 @@ namespace Volon.Actor
                 power = 0;
                 firstPower = -15.0f;
             }
-            Console.WriteLine("Width = " + other.GetRectangle().Width);
+        }
 
+        public override void SpecialHit(Character other)
+        {
+            if (other is NormalBlock)
+            {           
+                IsDescentFlag = false;
+                playerMoveSeconds = -50;
+                splashMountainSeconds = 0;
+                power = 0;
+                firstPower = -15.0f;
+            }            
+            else if (other is ThornsBlock)
+            {
+                isDeadFlag = true;
+            }
         }
         public override void Draw(Renderer renderer)
         {

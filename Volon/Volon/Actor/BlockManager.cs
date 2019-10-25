@@ -125,10 +125,14 @@ namespace Volon.Actor
                     {
                         continue;
                     }
-                    if (player.IsCollision(block))
+                    else if (player.IsCollision(block))
                     {
                         player.Hit(block);
                         block.Hit(player);
+                    }
+                    else if (player.IsSpecialCollision(block))
+                    {
+                        player.SpecialHit(block);
                     }
                 }
             }

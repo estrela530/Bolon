@@ -18,7 +18,7 @@ namespace Volon.Actor
         private Player player;
 
         public NormalBlock(Vector2 position, IGameMediator mediator)
-            : base("NormalBlock", 200, 50,30,50, mediator)
+            : base("NormalBlock", 200, 20,30,50, mediator)
         {
             this.position = position;
             isDeadFlag = false;
@@ -45,13 +45,10 @@ namespace Volon.Actor
         }
         public override void Hit(Character other)
         {
-            //Console.WriteLine(other);
-            //if (other.GetRectangle().Width >= 60 && other.GetRectangle().Width <= 115)
-            //{
-            //    Console.WriteLine("Width = " + GetRectangle().Width);
-
-            //    player.firstPower = -30.0f;
-            //}
+            if (other.GetRectangle().Intersects(this.GetSpecialRectangle()))
+            {
+                other.SpecialHit(this);
+            }
         }
 
         public override void Draw(Renderer renderer)
@@ -64,6 +61,8 @@ namespace Volon.Actor
             position.X -= speed;
         }
 
-
+        public override void SpecialHit(Character other)
+        {
+        }
     }
 }

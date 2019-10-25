@@ -48,7 +48,7 @@ namespace Volon.Scene
             renderer.DrawTexture("cloud", new Vector2(back2, 0), 0.5f);
             renderer.DrawTexture("cloud", new Vector2(back5, 0), 0.5f);
             renderer.DrawTexture("cloud2", new Vector2(back3, 0), 0.3f);
-            renderer.DrawTexture("cloud2", new Vector2(back6, 0), 0.3f);
+            renderer.DrawTexture("cloud2", new Vector2(back6, 0), 0.3f);            
             blockManager.Draw(renderer);
             numbers = new List<int>();
             for (int i = 2; i < 6; i++)
@@ -65,7 +65,8 @@ namespace Volon.Scene
             blockManager = new BlockManager();//ブロック管理者を生成
             blockManager.Add(player);
 
-            blockManager.Add(new NormalBlock(new Vector2(200, 550), igameMediator));//テンプレート
+            //75クリティカル　150ノーマル
+            blockManager.Add(new NormalBlock(new Vector2(75, 550), igameMediator));//テンプレート
             blockManager.Add(new NormalBlock(new Vector2(1050, 250), igameMediator));//佐々木
             //blockManager.Add(new SpecialBlock(new Vector2(300, 550), igameMediator));//佐々木
 

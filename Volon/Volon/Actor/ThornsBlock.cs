@@ -56,5 +56,13 @@ namespace Volon.Actor
         {
             position.X -= speed;
         }
+
+        public override void SpecialHit(Character other)
+        {
+            if (other.GetRectangle().Intersects(this.GetSpecialRectangle()))
+            {
+                other.SpecialHit(this);
+            }
+        }
     }
 }

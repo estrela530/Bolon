@@ -54,5 +54,9 @@ namespace Volon.Actor
         {
             position.X -= speed;
         }
+
+        public override void SpecialHit(Character other)
+        {
+        }
     }
 }
