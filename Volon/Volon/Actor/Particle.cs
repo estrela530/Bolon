@@ -52,17 +52,20 @@ namespace Volon.Actor
         
         public void Update(float delta)
         {
-            //_position += _direction * _speed * delta;
+            //プレイヤー軌跡
+            _position += _direction * _speed * delta;
 
-            _position.X += _direction.X * _speed * delta;
-            _position.Y += _direction.Y * firstSpeed;
-            firstSpeed -= 0.3f;
-
-            //_scale -= _shrinkRate * delta;
+            //ブロックパーティクル
+            //_position.X += _direction.X * _speed * delta;
+            //_position.Y += _direction.Y * firstSpeed;
+            //firstSpeed -= 0.3f;
 
             _duration -= delta;
-            //alpha -= delta;
-            //_color *= alpha;
+
+            //その他
+            _scale -= _shrinkRate * delta;
+            alpha = _duration;
+            _color *= alpha;
 
             if (_scale <= 0.0f || _duration <= 0.0f)
             {

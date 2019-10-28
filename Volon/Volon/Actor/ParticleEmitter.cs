@@ -76,7 +76,7 @@ namespace Volon.Actor
 
                 //float speed = rnd.Next(1, maxSpeed);
                 float speed = maxSpeed;
-
+                
                 p = new Particle(name,size, pos, speed, angle, scale, shrinkRate, duration, color);
                 particles.Add(p);
             }
@@ -98,7 +98,7 @@ namespace Volon.Actor
             float duration, int amount, int maxSpeed, Color color)
         {
             Particle p;
-            pos.X -= 40;
+           
             for (int i = 0; i < amount; i++)
             {
                 int angle = rnd.Next(-70,70);
