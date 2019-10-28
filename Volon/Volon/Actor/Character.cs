@@ -39,6 +39,8 @@ namespace Volon.Actor
         public abstract void Update(GameTime gameTime);
         public abstract void Shutdown();
         public abstract void Hit(Character other);
+        public abstract void SpecialHit(Character other);
+
         public bool IsDead()
         {
             return isDeadFlag;
@@ -67,7 +69,6 @@ namespace Volon.Actor
         {
             //矩形の生成
             Rectangle area = new Rectangle();
-            //Rectangle specialarea = new Rectangle();
 
             //位置と幅、高さを設定
             area.X = (int)position.X;
@@ -75,21 +76,33 @@ namespace Volon.Actor
             area.Height = height;
             area.Width = width;
 
-
-
-            ////クリティカル判定範囲の位置と幅、高さを設定
-            //specialarea.X = (int)position.X + 85;
-            //specialarea.Y = (int)position.Y;
-            //specialarea.Height = specialHeight;
-            //specialarea.Width = specialWidth;
-
             return area;
         }
 
+
+        public Rectangle GetSpecialRectangle()
+        {
+            //矩形の生成
+            Rectangle specialarea = new Rectangle();
+
+            //クリティカル判定範囲の位置と幅、高さを設定
+            specialarea.X = (int)position.X + 85;
+            specialarea.Y = (int)position.Y;
+            specialarea.Height = specialHeight;
+            specialarea.Width = specialWidth;
+
+            return specialarea;
+        }
         public bool IsCollision(Character other)
         {
             //RectangleクラスのIntersectsメソッドで重なり判定
             return this.GetRectangle().Intersects(other.GetRectangle());
+        }
+
+        public bool IsSpecialCollision(Character other)
+        {
+            //RectangleクラスのIntersectsメソッドで重なり判定
+            return this.GetRectangle().Intersects(other.GetSpecialRectangle());
         }
     }
 
